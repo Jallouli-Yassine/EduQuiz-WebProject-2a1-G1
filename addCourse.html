@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="css/slick.css">
     <!-- style CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/addCourse.css">
 
 </head>
 
@@ -110,62 +111,78 @@
     <section class="special_cource padding_top">
         <center>
             <div class="col-lg-8">
-                <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm"
+                <form class="form-contact contact_form" action="" method="post" id="contactForm"
                     novalidate="novalidate">
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <input class="form-control" name="profId" id="profId" type="text" disabled
-                                    value="ProfId">
+                                <div class="form-outline">
+                                    <input disabled type="email" id="typeEmail" class="form-control" />
+                                    <label class="form-label" for="typeEmail">Prof ID</label>
+                                </div>
                             </div>
                         </div>
+
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input class="form-control" name="Title" id="Title" type="text"
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter The Title'"
-                                    placeholder='Enter The Title'>
+                                <div class="form-outline">
+                                    <input class="form-control" name="Title" id="Title" type="text"
+                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter The Title'"
+                                        placeholder='Enter The Title'>
+                                    <label class="form-label" for="Title">Enter The Title</label>
+
+                                </div>
+                                <small id="errorTitle"></small>
                             </div>
                         </div>
+
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input class="form-control" name="Price" id="Price" type="number"
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter The Price'"
-                                    placeholder='Enter The Price'>
+                                <div class="form-outline">
+                                    <input type="number" id="Price" class="form-control" min="0" />
+                                    <label class="form-label" for="Price">Enter The Price</label>
+                                </div>
+
+                                <div class="error">
+                                    <small id="errorPrice"></small>
+                                </div>
                             </div>
                         </div>
 
 
                         <div class="col-12">
                             <div class="form-group">
-
-                                <textarea class="form-control w-100" name="Description" id="Description" cols="30"
-                                    rows="9" onfocus="this.placeholder = ''"
-                                    onblur="this.placeholder = 'Enter The Course Description'"
-                                    placeholder='Enter The Course Description'></textarea>
+                                <div class="form-outline">
+                                    <textarea class="form-control" id="Description" rows="4"></textarea>
+                                    <label class="form-label" for="Description">Enter The Course Description</label>
+                                </div>
+                                <small id="errorDescription"></small>
                             </div>
                         </div>
+
                         <div class="col-6">
                             <div class="form-group">
 
-                                <label class="form-label" for="customFile">Pick The Video File</label>
-                                <input type="file" class="form-control" id="customFile" />
+                                <label class="form-label" for="Video">Pick The Video File</label>
+                                <input type="file" class="form-control" id="Video" />
+                                <small id="errorVideoExt"></small>
                             </div>
+
                         </div>
+
                         <div class="col-6">
                             <div class="form-group">
 
-                                <label class="form-label" for="customFile">Pick The Image Of The Video</label>
-                                <input type="file" class="form-control" id="customFile" />
+                                <label class="form-label" for="Image">Pick The Image Of The Video</label>
+                                <input type="file" class="form-control" id="Image" />
+                                <small id="errorImageExt"></small>
                             </div>
+
                         </div>
-
-
-
-
 
                     </div>
                     <div class="form-group mt-3">
-                        <button type="submit" class="button button-contactForm btn_1">Add Course</button>
+                        <button type="submit" class="add_course button button-contactForm btn_1">Add Course</button>
                     </div>
                 </form>
             </div>
@@ -272,6 +289,7 @@
     <script src="js/waypoints.min.js"></script>
     <!-- custom js -->
     <script src="js/custom.js"></script>
+    <script src="./js/addCourse.js"></script>
 </body>
 
 </html>

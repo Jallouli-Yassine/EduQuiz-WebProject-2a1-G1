@@ -28,9 +28,7 @@ body {
 }
 
 /* line 12, E:/172 Etrain Education/172_Etrain_Education_html/sass/_common.scss */
-input:hover, input:focus {
-  outline: none !important;
-}
+
 
 /* line 15, E:/172 Etrain Education/172_Etrain_Education_html/sass/_common.scss */
 .gray_bg {
@@ -2040,11 +2038,7 @@ ul {
 }
 
 /* line 1461, E:/172 Etrain Education/172_Etrain_Education_html/sass/_blog.scss */
-.comment-form textarea {
-  padding-top: 18px;
-  border-radius: 12px;
-  height: 100% !important;
-}
+
 
 /* line 1467, E:/172 Etrain Education/172_Etrain_Education_html/sass/_blog.scss */
 .comment-form ::-webkit-input-placeholder {
@@ -4407,17 +4401,9 @@ ul {
 }
 
 /* line 190, E:/172 Etrain Education/172_Etrain_Education_html/sass/_cource_details.scss */
-.right-contents .feedeback textarea {
-  resize: none;
-  height: 130px;
-  border: 1px solid #edeff2;
-  border-radius: 0px;
-}
+
 
 /* line 195, E:/172 Etrain Education/172_Etrain_Education_html/sass/_cource_details.scss */
-.right-contents .feedeback textarea:focus {
-  box-shadow: none;
-}
 
 /* line 205, E:/172 Etrain Education/172_Etrain_Education_html/sass/_cource_details.scss */
 .right-contents .comments-area {
@@ -5652,22 +5638,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* line 545, E:/172 Etrain Education/172_Etrain_Education_html/sass/_elements.scss */
-.single-textarea {
-  display: block;
-  width: 100%;
-  line-height: 40px;
-  border: none;
-  outline: none;
-  background: #f9f9ff;
-  padding: 0 20px;
-  height: 100px;
-  resize: none;
-}
 
 /* line 555, E:/172 Etrain Education/172_Etrain_Education_html/sass/_elements.scss */
-.single-textarea:focus {
-  outline: none;
-}
 
 /* line 560, E:/172 Etrain Education/172_Etrain_Education_html/sass/_elements.scss */
 .single-input-primary {
@@ -6774,10 +6746,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* line 77, E:/172 Etrain Education/172_Etrain_Education_html/sass/_contact.scss */
-.form-contact textarea {
-  border-radius: 12px;
-  height: 100% !important;
-}
+
 
 @media (max-width: 576px) {
   /* line 89, E:/172 Etrain Education/172_Etrain_Education_html/sass/_contact.scss */
