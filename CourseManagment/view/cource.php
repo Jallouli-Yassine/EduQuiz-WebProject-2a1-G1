@@ -1,3 +1,9 @@
+<?php 
+    require_once "./../controllers/CourseController.php";
+    $courseC = new CourseC();
+    $listeCourse=$courseC->getTrueCourses(1);
+    //$listeCourse=$courseC->afficherCourses();
+?>
 <!doctype html>
 <html lang="en">
 
@@ -8,21 +14,22 @@
     <title>Etrain</title>
     <link rel="icon" href="img/favicon.png">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="./../../css/bootstrap.min.css">
     <!-- animate CSS -->
-    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="./../../css/animate.css">
     <!-- owl carousel CSS -->
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="./../../css/owl.carousel.min.css">
     <!-- themify CSS -->
-    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="./../../css/themify-icons.css">
     <!-- flaticon CSS -->
-    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="./../../css/flaticon.css">
     <!-- font awesome CSS -->
-    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="./../../css/magnific-popup.css">
     <!-- swiper CSS -->
-    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="./../../css/slick.css">
     <!-- style CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./../../css/style.css">
+    <link rel="stylesheet" href="./../CourseCSS/style.css">
 </head>
 
 <body>
@@ -32,10 +39,10 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a style="width: 135px;" class="navbar-brand logo_1" href="index.html"> <img
-                                src="img/EduQuizWhite.png" alt="logo"> </a>
-                        <a style="width: 135px;" class="navbar-brand logo_2" href="index.html"> <img
-                                src="img/EduQuiz.png" alt="logo"> </a>
+                        <a style="width: 135px;" class="navbar-brand logo_1" href="./../../index.html"> <img
+                                src="./../../img/EduQuizWhite.png" alt="logo"> </a>
+                        <a style="width: 135px;" class="navbar-brand logo_2" href="./../../index.html"> <img
+                                src="./../../img/EduQuiz.png" alt="logo"> </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -101,42 +108,58 @@
     <!-- breadcrumb start-->
 
     <!--::review_part start::-->
-    <section class="special_cource padding_top">
+
+    <section style="margin  -bottom : 10%" class="special_cource padding_top">
         <div class="container">
+
             <div class="row justify-content-center">
                 <div class="col-xl-5">
                     <div class="section_tittle text-center">
-                        <p>popular courses</p>
-                        <h2>Special Courses</h2>
+                        <h2>All Courses</h2>
                     </div>
                 </div>
             </div>
+
+            <!-- BEGIN NEW -->
+
+            <!-- END NEW -->
+
             <div class="row">
+                <?php foreach ($listeCourse as $course) {   ?>
                 <div class="col-sm-6 col-lg-4">
-                    <div class="single_special_cource">
-                        <img src="img/special_cource_1.png" class="special_img" alt="">
+                    <div style="margin-bottom: 5%; height: 10px !important;" class="single_special_cource">
+                        <img src="./../../img/special_cource_1.png" class="special_img" alt="">
                         <div class="special_cource_text">
-                            <a href="course-details.html" class="btn_4">Web Development</a>
-                            <h4>$130.00</h4>
-                            <a href="course-details.html">
-                                <h3>Web Development</h3>
+                            <a href="course-details.html" class="btn_4">
+                                <?php echo $course['categorie'] ?>
                             </a>
-                            <p>Which whose darkness saying were life unto fish wherein all fish of together called</p>
+                            <h4>
+                                <?php echo $course['price'] ." DT" ?>
+                            </h4>
+                            <a href="course-details.html">
+                                <h3>
+                                    <?php echo $course['title'] ?>
+                                </h3>
+                            </a>
+                            <p>
+                                <?php echo $course['Descrip'] ?>
+                               
+                            </p>
                             <div class="author_info">
                                 <div class="author_img">
-                                    <img src="img/author/author_1.png" alt="">
+                                    <img src="./../../img/author/author_1.png" alt="">
                                     <div class="author_info_text">
-                                        <p>Conduct by:</p>
+                                        <p> <?php echo $course['etat'] ?></p>
                                         <h5><a href="#">James Well</a></h5>
                                     </div>
                                 </div>
                                 <div class="author_rating">
                                     <div class="rating">
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/star.svg" alt=""></a>
+                                        <a href="#"><img src="./../../img/icon/color_star.svg" alt=""></a>
+                                        <a href="#"><img src="./../../img/icon/color_star.svg" alt=""></a>
+                                        <a href="#"><img src="./../../img/icon/color_star.svg" alt=""></a>
+                                        <a href="#"><img src="./../../img/icon/color_star.svg" alt=""></a>
+                                        <a href="#"><img src="./../../img/icon/star.svg" alt=""></a>
                                     </div>
                                     <p>3.8 Ratings</p>
                                 </div>
@@ -145,72 +168,7 @@
 
                     </div>
                 </div>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="single_special_cource">
-                        <img src="img/special_cource_2.png" class="special_img" alt="">
-                        <div class="special_cource_text">
-                            <a href="course-details.html" class="btn_4">design</a>
-                            <h4>$160.00</h4>
-                            <a href="course-details.html">
-                                <h3>Web UX/UI Design </h3>
-                            </a>
-                            <p>Which whose darkness saying were life unto fish wherein all fish of together called</p>
-                            <div class="author_info">
-                                <div class="author_img">
-                                    <img src="img/author/author_2.png" alt="">
-                                    <div class="author_info_text">
-                                        <p>Conduct by:</p>
-                                        <h5><a href="#">James Well</a></h5>
-                                    </div>
-                                </div>
-                                <div class="author_rating">
-                                    <div class="rating">
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/star.svg" alt=""></a>
-                                    </div>
-                                    <p>3.8 Ratings</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="single_special_cource">
-                        <img src="img/special_cource_3.png" class="special_img" alt="">
-                        <div class="special_cource_text">
-                            <a href="course-details.html" class="btn_4">Wordpress</a>
-                            <h4>$140.00</h4>
-                            <a href="course-details.html">
-                                <h3>Wordpress Development</h3>
-                            </a>
-                            <p>Which whose darkness saying were life unto fish wherein all fish of together called</p>
-                            <div class="author_info">
-                                <div class="author_img">
-                                    <img src="img/author/author_3.png" alt="">
-                                    <div class="author_info_text">
-                                        <p>Conduct by:</p>
-                                        <h5><a href="#">James Well</a></h5>
-                                    </div>
-                                </div>
-                                <div class="author_rating">
-                                    <div class="rating">
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="img/icon/star.svg" alt=""></a>
-                                    </div>
-                                    <p>3.8 Ratings</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
     </section>
@@ -243,7 +201,7 @@
                                 </div>
                                 <div class="col-lg-4 col-xl-2 col-sm-4">
                                     <div class="testimonial_slider_img">
-                                        <img src="img/testimonial_img_1.png" alt="#">
+                                        <img src="./../../img/testimonial_img_1.png" alt="#">
                                     </div>
                                 </div>
                                 <div class="col-xl-4 d-none d-xl-block">
@@ -257,7 +215,7 @@
                                 </div>
                                 <div class="col-xl-2 d-none d-xl-block">
                                     <div class="testimonial_slider_img">
-                                        <img src="img/testimonial_img_1.png" alt="#">
+                                        <img src="./../../img/testimonial_img_1.png" alt="#">
                                     </div>
                                 </div>
                             </div>
@@ -275,7 +233,7 @@
                                 </div>
                                 <div class="col-lg-4 col-xl-2 col-sm-4">
                                     <div class="testimonial_slider_img">
-                                        <img src="img/testimonial_img_1.png" alt="#">
+                                        <img src="./../../img/testimonial_img_1.png" alt="#">
                                     </div>
                                 </div>
                                 <div class="col-xl-4 d-none d-xl-block">
@@ -289,7 +247,7 @@
                                 </div>
                                 <div class="col-xl-2 d-none d-xl-block">
                                     <div class="testimonial_slider_img">
-                                        <img src="img/testimonial_img_1.png" alt="#">
+                                        <img src="./../../img/testimonial_img_1.png" alt="#">
                                     </div>
                                 </div>
                             </div>
@@ -307,7 +265,7 @@
                                 </div>
                                 <div class="col-lg-4 col-xl-2 col-sm-4">
                                     <div class="testimonial_slider_img">
-                                        <img src="img/testimonial_img_1.png" alt="#">
+                                        <img src="./../../img/testimonial_img_1.png" alt="#">
                                     </div>
                                 </div>
                                 <div class="col-xl-4 d-none d-xl-block">
@@ -321,7 +279,7 @@
                                 </div>
                                 <div class="col-xl-2 d-none d-xl-block">
                                     <div class="testimonial_slider_img">
-                                        <img src="img/testimonial_img_1.png" alt="#">
+                                        <img src="./../../img/testimonial_img_1.png" alt="#">
                                     </div>
                                 </div>
                             </div>
@@ -341,7 +299,7 @@
                 <div class="col-sm-6 col-md-4 col-xl-3">
                     <div class="single-footer-widget footer_1">
                         <a style="width: 135px;" class="navbar-brand logo_2" href="index.html"> <img
-                                src="img/EduQuiz.png" alt="logo"> </a>
+                                src="./../../img/EduQuiz.png" alt="logo"> </a>
                         <p>But when shot real her. Chamber her one visite removal six
                             sending himself boys scot exquisite existend an </p>
                         <p>But when shot real her hamber her </p>
@@ -408,26 +366,26 @@
 
     <!-- jquery plugins here-->
     <!-- jquery -->
-    <script src="js/jquery-1.12.1.min.js"></script>
+    <script src="./../../js/jquery-1.12.1.min.js"></script>
     <!-- popper js -->
-    <script src="js/popper.min.js"></script>
+    <script src="./../../js/popper.min.js"></script>
     <!-- bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="./../../js/bootstrap.min.js"></script>
     <!-- easing js -->
-    <script src="js/jquery.magnific-popup.js"></script>
+    <script src="./../../js/jquery.magnific-popup.js"></script>
     <!-- swiper js -->
-    <script src="js/swiper.min.js"></script>
+    <script src="./../../js/swiper.min.js"></script>
     <!-- swiper js -->
-    <script src="js/masonry.pkgd.js"></script>
+    <script src="./../../js/masonry.pkgd.js"></script>
     <!-- particles js -->
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="./../../js/owl.carousel.min.js"></script>
+    <script src="./../../js/jquery.nice-select.min.js"></script>
     <!-- swiper js -->
-    <script src="js/slick.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/waypoints.min.js"></script>
+    <script src="./../../js/slick.min.js"></script>
+    <script src="./../../js/jquery.counterup.min.js"></script>
+    <script src="./../../js/waypoints.min.js"></script>
     <!-- custom js -->
-    <script src="js/custom.js"></script>
+    <script src="./../../js/custom.js"></script>
 </body>
 
 </html>

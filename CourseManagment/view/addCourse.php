@@ -1,3 +1,43 @@
+
+<?php 
+    require_once"./../controllers/CourseController.php";
+    require_once"./../model/courseModel.php";
+
+        if( 
+             isset($_POST['Categorie']) 
+            && isset($_POST['Title']) 
+            && isset($_POST['Price']) 
+            && isset($_POST['Description']) 
+            && isset($_POST['videoUrl']) 
+            && isset($_POST['imageUrl']) 
+            ){
+
+        if( 
+            !empty($_POST['Categorie'])&&
+            !empty($_POST['Title'])&&
+            !empty($_POST['Price'])&&
+            !empty($_POST['Description'])&&
+            !empty($_POST['videoUrl'])&&
+            !empty($_POST['imageUrl'])
+            )
+            {
+                $courseC = new CourseC();
+                $course = new Course($_POST['profID'],
+                $_POST['Categorie'],
+                $_POST['Title'],
+                $_POST['Price'],
+                $_POST['Description'],
+                $_POST['videoUrl'],
+                $_POST['imageUrl'],
+                0
+            );
+
+                $courseC->ajouterCourse($course);
+
+                header("Location:./cource.php");
+            }
+        }
+?>
 <!doctype html>
 <html lang="en">
 
@@ -15,20 +55,20 @@
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css" rel="stylesheet" />
     <!-- animate CSS -->
-    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="./../../css/animate.css">
     <!-- owl carousel CSS -->
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="./../../css/owl.carousel.min.css">
     <!-- themify CSS -->
-    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="./../../css/themify-icons.css">
     <!-- flaticon CSS -->
-    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="./../../css/flaticon.css">
     <!-- font awesome CSS -->
-    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="./../../css/magnific-popup.css">
     <!-- swiper CSS -->
-    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="./../../css/slick.css">
     <!-- style CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/addCourse.css">
+    <link rel="stylesheet" href="./../../css/style.css">
+    <link rel="stylesheet" href="./../../css/addCourse.css">
 
 </head>
 
@@ -39,10 +79,10 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a style="width: 135px;" class="navbar-brand logo_1" href="index.html"> <img
-                                src="img/EduQuizWhite.png" alt="logo"> </a>
-                        <a style="width: 135px;" class="navbar-brand logo_2" href="index.html"> <img
-                                src="img/EduQuiz.png" alt="logo"> </a>
+                        <a style="width: 135px;" class="navbar-brand logo_1" href="./../../index.html"> <img
+                                src="./../../img/EduQuizWhite.png" alt="logo"> </a>
+                        <a style="width: 135px;" class="navbar-brand logo_2" href="./../../index.html"> <img
+                                src="./../../img/EduQuiz.png" alt="logo"> </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -111,16 +151,40 @@
     <section class="special_cource padding_top">
         <center>
             <div class="col-lg-8">
-                <form class="form-contact contact_form" action="" method="post" id="contactForm"
+                <form class="form-contact contact_form" action="" method="POST" id="contactForm"
                     novalidate="novalidate">
                     <div class="row">
+
+
+                                    <input  value="50"  type="hidden" name="profID" id="profID" class="form-control" />
+
                         <div class="col-12">
-                            <div class="form-group">
-                                <div class="form-outline">
-                                    <input disabled type="email" id="typeEmail" class="form-control" />
-                                    <label class="form-label" for="typeEmail">Prof ID</label>
-                                </div>
+                            <select style="margin-bottom :3%" class="form-select" name="Categorie" aria-label="Default select example">
+                                <option selected>Select Course Categori</option>
+                                <option value="programation">programation</option>
+                                <option value="photography">photography</option>
+                                <option value="design">design</option>
+                                <option value="math">math</option>
+                                
+                            </select>
+                            <!--
+
+                            <div class="btn-group">
+                                <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off"
+                                    checked />
+                                <label class="btn btn-secondary" for="option1">Checked</label>
+
+                                <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" />
+                                <label class="btn btn-secondary" for="option2">Radio</label>
+
+                                <input type="radio" class="btn-check" name="options" id="option3" autocomplete="off" />
+                                <label class="btn btn-secondary" for="option3">Radio</label>
                             </div>
+                        -->
+
+
+                            <small id="errorCategories"></small>
+
                         </div>
 
                         <div class="col-sm-6">
@@ -130,7 +194,6 @@
                                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter The Title'"
                                         placeholder='Enter The Title'>
                                     <label class="form-label" for="Title">Enter The Title</label>
-
                                 </div>
                                 <small id="errorTitle"></small>
                             </div>
@@ -139,7 +202,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="form-outline">
-                                    <input type="number" id="Price" class="form-control" min="0" />
+                                    <input name="Price" type="number" id="Price" class="form-control" min="0" />
                                     <label class="form-label" for="Price">Enter The Price</label>
                                 </div>
 
@@ -153,7 +216,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <div class="form-outline">
-                                    <textarea class="form-control" id="Description" rows="4"></textarea>
+                                    <textarea name="Description" class="form-control" id="Description" rows="4"></textarea>
                                     <label class="form-label" for="Description">Enter The Course Description</label>
                                 </div>
                                 <small id="errorDescription"></small>
@@ -164,8 +227,8 @@
                             <div class="form-group">
 
                                 <label class="form-label" for="Video">Pick The Video File</label>
-                                <input type="file" class="form-control" id="Video" />
-                                <small id="errorVideoExt"></small>
+                                <input name="videoUrl" type="file" class="form-control" id="Video" />
+                              <small id="errorVideoExt"></small>  
                             </div>
 
                         </div>
@@ -174,15 +237,15 @@
                             <div class="form-group">
 
                                 <label class="form-label" for="Image">Pick The Image Of The Video</label>
-                                <input type="file" class="form-control" id="Image" />
-                                <small id="errorImageExt"></small>
+                                <input name="imageUrl" type="file" class="form-control" id="Image" />
+                               <small id="errorImageExt"></small> 
                             </div>
 
                         </div>
 
                     </div>
                     <div class="form-group mt-3">
-                        <button type="submit" class="add_course button button-contactForm btn_1">Add Course</button>
+                        <button type="submit" class="add_course button button-contactForm btn_1">add course</button>
                     </div>
                 </form>
             </div>
@@ -201,7 +264,7 @@
                 <div class="col-sm-6 col-md-4 col-xl-3">
                     <div class="single-footer-widget footer_1">
                         <a style="width: 135px;" class="navbar-brand logo_2" href="index.html"> <img
-                                src="img/EduQuiz.png" alt="logo"> </a>
+                                src="./../../img/EduQuiz.png" alt="logo"> </a>
                         <p>But when shot real her. Chamber her one visite removal six
                             sending himself boys scot exquisite existend an </p>
                         <p>But when shot real her hamber her </p>
@@ -265,31 +328,31 @@
         </div>
     </footer>
     <!-- footer part end-->
-
+    <!-- jquery -->
+    <script src="./../../js/addCourse.js"></script>
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
-    <!-- jquery -->
-    <script src="js/jquery-1.12.1.min.js"></script>
     <!-- popper js -->
-    <script src="js/popper.min.js"></script>
+    <script src="./../../js/popper.min.js"></script>
     <!-- bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="./../../js/bootstrap.min.js"></script>
     <!-- easing js -->
-    <script src="js/jquery.magnific-popup.js"></script>
+    <script src="./../../js/jquery.magnific-popup.js"></script>
     <!-- swiper js -->
-    <script src="js/swiper.min.js"></script>
+    <script src="./../../js/swiper.min.js"></script>
     <!-- swiper js -->
-    <script src="js/masonry.pkgd.js"></script>
+    <script src="./../../js/masonry.pkgd.js"></script>
     <!-- particles js -->
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="./../../js/owl.carousel.min.js"></script>
+    <script src="./../../js/jquery.nice-select.min.js"></script>
     <!-- swiper js -->
-    <script src="js/slick.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/waypoints.min.js"></script>
+    <script src="./../../js/slick.min.js"></script>
+    <script src="./../../js/jquery.counterup.min.js"></script>
+    <script src="./../../js/waypoints.min.js"></script>
     <!-- custom js -->
-    <script src="js/custom.js"></script>
-    <script src="./js/addCourse.js"></script>
+    <script src="./../../js/custom.js"></script>
+  
+   
 </body>
 
 </html>

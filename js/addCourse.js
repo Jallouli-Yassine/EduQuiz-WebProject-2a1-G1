@@ -50,7 +50,6 @@ document.getElementById('contactForm').addEventListener("submit", (e) => {
     inputRequired(DescriptionInput.value, "errorDescription", "DESCRIPTION");
     ImageExt(ImageInput.value);
     VidExt(VideoInput.value);
-
     //alert(error);
     if (error > 0)
         e.preventDefault();
