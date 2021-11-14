@@ -6,7 +6,7 @@
             && isset($_POST['nameuser']) 
             && isset($_POST['content']) 
             && isset($_POST['title']) 
-             && isset($_POST['date']) 
+            && isset($_POST['date']) 
             && isset($_POST['imageurl']) 
             ){
 
@@ -159,7 +159,7 @@
 
                                     <input  value="50"  type="hidden" name="Idpost" id="Idpost" class="form-control" />
                                     <input  value="50"  type="hidden" name="Iduser" id="Iduser" class="form-control" />
-                                    <input  value="23-06-2021"  type="hidden" name="date" id="date" class="form-control" />
+                                    <input  value="2021-06-23"  type="hidden" name="date" id="date" class="form-control" />
                                     <input  value="salma"  type="hidden" name="nameuser" id="nameuser" class="form-control" />
 
 
