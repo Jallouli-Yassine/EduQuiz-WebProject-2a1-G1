@@ -11,7 +11,7 @@
     
     $courseC = new CourseC();
     $courseC->activeStateCourse($_POST['courseIDp']);
-    header("Location:./all-courses");
+    header("Location:./all-courses.php");
   }
 
  ?>

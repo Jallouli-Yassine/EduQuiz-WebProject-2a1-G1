@@ -1422,7 +1422,10 @@
                                 <input style="float : right;" class="btn btn-primary" type="submit" value="ACTIVATE COURSE">
                                 <input name="courseIDp" type="hidden" value="<?php echo $Fcourse['courseID'] ?>" >
                                 </form>
-                              
+                                <form action="./deleteCourse.php" method="post">
+                                    <input style="float : right; margin-right:10px" class="btn btn-danger" type="submit" value="Decline">
+                                    <input name="courseIDD" type="hidden" value="<?php echo $Fcourse['courseID'] ?>" >
+                                </form>
                            
                             </td>
                         

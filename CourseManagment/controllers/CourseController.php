@@ -73,6 +73,18 @@
 
         }
 
+        function deleteCourse($courseID){
+            $db = config::getConnexion();
+            $sql = "DELETE FROM courses where courseID=:courseID";
+
+            try {
+                $query = $db->prepare($sql);
+                $query->bindValue(':courseID',$courseID);
+                $query->execute();
+            }catch(Exception $e){
+				$e->getMessage();
+			}
+        }
     }
     
 ?>
