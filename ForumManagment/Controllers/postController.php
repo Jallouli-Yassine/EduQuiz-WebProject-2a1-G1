@@ -28,6 +28,18 @@
 			}
         }
 
+        function afficherpost(){
+			$sql="SELECT * FROM post";
+			$db = config::getConnexion();
+			try{
+				$liste = $db->query($sql);
+				return $liste;
+			}
+			catch(Exception $e){
+				die('Erreur:'. $e->getMeesage());
+			}
+		}
+
     }
     
 ?>
