@@ -85,6 +85,44 @@
 				$e->getMessage();
 			}
         }
+
+        function modifierCourse($course, $courseID){
+			try {
+				$db = config::getConnexion();
+				$query = $db->prepare(
+				'UPDATE courses SET
+				title= :title, price= :price, Descrip= :Descrip, video_url= :video_url, picture_url= :picture_url
+				WHERE courseID= :courseID');
+				$query->execute([
+					'title' => $course->getTitle(),
+					'price' => $course->getPrice(),
+					'Descrip' => $course->getDescription(),
+					'video_url' => $course->getVideo_url(),
+					'picture_url' => $course->getPicture_url(),
+					'courseID' => $courseID
+				]);
+			//	echo $query->rowCount() . " records UPDATED successfully <br>";
+			} catch (PDOException $e) {
+				$e->getMessage();
+
+			}
+		}
+
+        function getOneCourse($courseID) {
+			$sql="SELECT * from courses where courseID=$courseID";
+			$db = config::getConnexion();
+			try{
+				$query=$db->prepare($sql);
+				$query->execute();
+
+				$course=$query->fetch();
+				return $course;
+			}
+			catch (Exception $e){
+				echo $e->getMessage();
+			}
+        }
+
     }
     
 ?>

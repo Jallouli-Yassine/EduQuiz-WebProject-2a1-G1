@@ -2,41 +2,45 @@
     require_once"./../controllers/CourseController.php";
     require_once"./../model/courseModel.php";
 
-        if( 
-             isset($_POST['Categorie']) 
-            && isset($_POST['Title']) 
-            && isset($_POST['Price']) 
-            && isset($_POST['Description']) 
-            && isset($_POST['videoUrl']) 
-            && isset($_POST['imageUrl']) 
-            ){
+         $course = null;
+         $courseC = new CourseC();
+        
+         if( 
+            
+              isset($_POST['courseID']) 
+           &&  isset($_POST['Title']) 
+           && isset($_POST['Price']) 
+           && isset($_POST['Description']) 
+           && isset($_POST['videoUrl']) 
+           && isset($_POST['imageUrl']) 
+           ){
 
-        if( 
-            !empty($_POST['Categorie'])&&
-            !empty($_POST['Title'])&&
-            !empty($_POST['Price'])&&
-            !empty($_POST['Description'])&&
-            !empty($_POST['videoUrl'])&&
-            !empty($_POST['imageUrl'])
-            )
+       if( 
+          
+           !empty($_POST['courseID'])&&
+           !empty($_POST['Title'])&&
+           !empty($_POST['Price'])&&
+           !empty($_POST['Description'])&&
+           !empty($_POST['videoUrl'])&&
+           !empty($_POST['imageUrl'])
+           )
             {
-                $courseC = new CourseC();
-                $course = new Course($_POST['profID'],
+                $course = new Course(
+                $_POST['profID'],
                 $_POST['Categorie'],
                 $_POST['Title'],
                 $_POST['Price'],
                 $_POST['Description'],
                 $_POST['videoUrl'],
-                $_POST['imageUrl'],
-                0
-            );
+                $_POST['imageUrl'],1);
 
-                $courseC->ajouterCourse($course);
-
-                header("Location:./cource.php");
-            }
+                $courseC->modifierCourse($course,$_POST['courseID']);
+                header("Location:./all-courses.php");
+            }else
+            echo "ERROR";
         }
 ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -44,7 +48,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Add Course</title>
+    <title>Update Course</title>
     <link rel="icon" href="img/favicon.png">
     <!-- Bootstrap CSS -->
     <!-- Font Awesome -->
@@ -117,7 +121,7 @@
                                 -->
 
                                 <li class="d-none d-lg-block">
-                                    <a class="btn_1" href="#">Register now</a>
+                                    <a class="btn_1" href="#">Update now</a>
                                 </li>
                             </ul>
                         </div>
@@ -136,7 +140,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb_iner text-center">
                         <div class="breadcrumb_iner_item">
-                            <h2>Add new course</h2>
+                            <h2>update course</h2>
                             <!--<p>Home<span>/</span>Courses</p>-->
                         </div>
                     </div>
@@ -149,17 +153,23 @@
     <!--::review_part start::-->
     <section class="special_cource padding_top">
         <center>
+
             <div class="col-lg-8">
+            
+                <?php
+                     if (isset($_POST['courseID'])){
+                        $course = $courseC->getOneCourse($_POST['courseID']);
+	             ?>
+    
                 <form class="form-contact contact_form" action="" method="POST" id="contactForm"
                     novalidate="novalidate">
+              
+
                     <div class="row">
-
-
-                                    <input  value="50"  type="hidden" name="profID" id="profID" class="form-control" />
-
-                        <div class="col-12">
+                    <div class="col-12">
+                    <input  value="50"  type="hidden" name="profID" id="profID" class="form-control" />
                             <select style="margin-bottom :3%" class="form-select" name="Categorie" aria-label="Default select example">
-                                <option selected>Select Course Categori</option>
+                                <option selected><?php echo $course['categorie']?></option>
                                 <option value="programation">programation</option>
                                 <option value="photography">photography</option>
                                 <option value="design">design</option>
@@ -185,11 +195,22 @@
                             <small id="errorCategories"></small>
 
                         </div>
-
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="form-outline">
-                                    <input class="form-control" name="Title" id="Title" type="text"
+                                    <input value="<?php echo $course['courseID']?>" class="form-control"
+                                        name="courseID" id="courseID" type="text" onfocus="this.placeholder = ''"
+                                        onblur="this.placeholder = 'Enter The courseID'"
+                                        placeholder='Enter The courseID'>
+                                    <label class="form-label" for="courseID">Enter The courseID</label>
+                                </div>
+                                <small id="errorcourseID"></small>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="form-outline">
+                                    <input value="<?php echo $course['title']?>" class="form-control" name="Title" id="Title" type="text"
                                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter The Title'"
                                         placeholder='Enter The Title'>
                                     <label class="form-label" for="Title">Enter The Title</label>
@@ -201,7 +222,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="form-outline">
-                                    <input name="Price" type="number" id="Price" class="form-control" min="0" />
+                                    <input value="<?php echo $course['price']?>" name="Price" type="number" id="Price" class="form-control" min="0" />
                                     <label class="form-label" for="Price">Enter The Price</label>
                                 </div>
 
@@ -215,7 +236,8 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <div class="form-outline">
-                                    <textarea name="Description" class="form-control" id="Description" rows="4"></textarea>
+                                    <textarea   name="Description" class="form-control" id="Description"
+                                        rows="4"><?php echo $course['Descrip']?></textarea>
                                     <label class="form-label" for="Description">Enter The Course Description</label>
                                 </div>
                                 <small id="errorDescription"></small>
@@ -226,8 +248,8 @@
                             <div class="form-group">
 
                                 <label class="form-label" for="Video">Pick The Video File</label>
-                                <input name="videoUrl" type="file" class="form-control" id="Video" />
-                              <small id="errorVideoExt"></small>  
+                                <input value="<?php echo "Videos/".$course['video_url']?>"  name="videoUrl" type="file" class="form-control" id="Video" />
+                                <small id="errorVideoExt"></small>
                             </div>
 
                         </div>
@@ -236,17 +258,20 @@
                             <div class="form-group">
 
                                 <label class="form-label" for="Image">Pick The Image Of The Video</label>
-                                <input name="imageUrl" type="file" class="form-control" id="Image" />
-                               <small id="errorImageExt"></small> 
+                                <input   name="imageUrl" type="file" class="form-control" id="Image" />
+                                <small id="errorImageExt"></small>
                             </div>
 
                         </div>
 
                     </div>
                     <div class="form-group mt-3">
-                        <button type="submit" class="add_course button button-contactForm btn_1">add course</button>
+                        <button type="submit" class="add_course button button-contactForm btn_1">update course</button>
                     </div>
                 </form>
+                <?php
+                   }	 
+               ?>
             </div>
         </center>
 
@@ -350,8 +375,8 @@
     <script src="./../../js/waypoints.min.js"></script>
     <!-- custom js -->
     <script src="./../../js/custom.js"></script>
-  
-   
+
+
 </body>
 
 </html>

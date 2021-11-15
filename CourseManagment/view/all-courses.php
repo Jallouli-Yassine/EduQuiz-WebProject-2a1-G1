@@ -17,6 +17,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>All Courses | Kiaalap - Kiaalap Admin Template</title>
     <meta name="description" content="">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
 		============================================ -->
@@ -1398,11 +1399,11 @@
                 </div>
             </div>
         </div>
-        <div class="courses-area">
+        <div style="height:100vh; background-color:white;" class="courses-area">
             <div class="container-fluid">
                 <div class="row">
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-8">
                         <h2 style="text-align:center;">course desactive</h2>
                         <table class="table">
                             <tr>
@@ -1410,45 +1411,72 @@
                                 <td>ProfID</td>
                                 <td>Title</td>
                                 <td>etat</td>
-                           
+                                <td>#</td>
+
                             </tr>
                             <?php foreach($listeDesactivé as $Fcourse) {?>
                             <tr>
-                                <td><?php echo $Fcourse['courseID'] ?></td>
-                                <td><?php echo $Fcourse['profID'] ?></td>
-                                <td><?php echo $Fcourse['title'] ?></td>
-                                <td><?php echo $Fcourse['etat'] ?>
-                                <form action="./updateStateCourse.php" method="POST">
-                                <input style="float : right;" class="btn btn-primary" type="submit" value="ACTIVATE COURSE">
-                                <input name="courseIDp" type="hidden" value="<?php echo $Fcourse['courseID'] ?>" >
-                                </form>
-                                <form action="./deleteCourse.php" method="post">
-                                    <input style="float : right; margin-right:10px" class="btn btn-danger" type="submit" value="Decline">
-                                    <input name="courseIDD" type="hidden" value="<?php echo $Fcourse['courseID'] ?>" >
-                                </form>
-                           
-                            </td>
-                        
+                                <td>
+                                    <?php echo $Fcourse['courseID'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $Fcourse['profID'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $Fcourse['title'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $Fcourse['etat'] ?>
+                                </td>
+                                <td>
+                                    <form action="./updateStateCourse.php" method="POST">
+                                        <input style="float : left;margin-right:5%;margin-left:5%"
+                                            class="btn btn-primary" type="submit" value="ACTIVATE COURSE">
+                                        <input name="courseIDp" type="hidden"
+                                            value="<?php echo $Fcourse['courseID'] ?>">
+                                    </form>
+                                    <form action="./deleteCourse.php" method="post">
+                                        <input style="float : left;margin-right:5%;margin-left:5% margin-right:10px"
+                                            class="btn btn-danger" type="submit" value="Decline">
+                                        <input name="courseIDD" type="hidden"
+                                            value="<?php echo $Fcourse['courseID'] ?>">
+                                    </form>
+                                </td>
                             </tr>
                             <?php } ?>
                         </table>
                     </div>
-                    <div class="col-lg-6">
-                    <h2 style="text-align:center;">course deja active</h2>
+                    <div class="col-lg-8">
+                        <h2 style="text-align:center;">course deja active</h2>
                         <table class="table">
                             <tr>
                                 <td>courseID</td>
                                 <td>ProfID</td>
                                 <td>Title</td>
                                 <td>etat</td>
+                                <td>#</td>
                             </tr>
 
                             <?php foreach($coursActivé as $Tcourse) {?>
                             <tr>
-                                <td><?php echo $Tcourse['courseID'] ?></td>
-                                <td><?php echo $Tcourse['profID'] ?></td>
-                                <td><?php echo $Tcourse['title'] ?></td>
-                                <td><?php echo $Tcourse['etat'] ?></td>
+                                <td>
+                                    <?php echo $Tcourse['courseID'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $Tcourse['profID'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $Tcourse['title'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $Tcourse['etat'] ?>
+                                </td>
+                                <td>
+                                    <form action="./modifierCourse.php" method="POST">
+                                        <input class="btn btn-warning" type="submit" value="update">
+                                        <input type="hidden" name="courseID" value="<?=$Tcourse['courseID']?>">
+                                    </form>
+                                </td>
                             </tr>
                             <?php } ?>
                         </table>

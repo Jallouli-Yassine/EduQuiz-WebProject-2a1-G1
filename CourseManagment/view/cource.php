@@ -109,7 +109,7 @@
 
     <!--::review_part start::-->
 
-    <section style="margin  -bottom : 10%" class="special_cource padding_top">
+    <section style="margin-bottom : 10%" class="special_cource padding_top">
         <div class="container">
 
             <div class="row justify-content-center">
@@ -124,10 +124,10 @@
 
             <!-- END NEW -->
 
-            <div class="row">
+            <div style="height:100%;" class="row">
                 <?php foreach ($listeCourse as $course) {   ?>
-                <div class="col-sm-6 col-lg-4">
-                    <div style="margin-bottom: 5%; height: 10px !important;" class="single_special_cource">
+                <div class="col-lg-4">
+                    <div style="margin-bottom: 5%; height: 650px !important;" class="single_special_cource">
                         <img src="./../../img/special_cource_1.png" class="special_img" alt="">
                         <div class="special_cource_text">
                             <a href="course-details.html" class="btn_4">
