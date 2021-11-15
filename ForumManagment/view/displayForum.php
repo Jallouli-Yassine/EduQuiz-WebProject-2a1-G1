@@ -203,13 +203,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6 col-lg-4">
-                    <div class="single_special_cource">
+                
+                   
                         <?php
 				foreach($listepost as $post){
 			?>
-			
-				
+			<div class="col-sm-6 col-lg-4">
+                <div class="single_special_cource">
 			
                         <img src="img/special_cource_1.png" class="special_img" alt="">
                         <div class="special_cource_text">
@@ -227,11 +227,13 @@
                                 
                             </div>
                         </div>
+                        </div>
+                        </div>
                         <?php
 				}
 			?>
-                    </div>
-                </div>
+                   
+               
                 
                 
                 

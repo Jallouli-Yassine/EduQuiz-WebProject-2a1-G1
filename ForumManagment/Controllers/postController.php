@@ -40,6 +40,47 @@
 			}
 		}
 
+
+        function supprimerpost($post){
+			$sql="DELETE FROM post WHERE post=:post";
+			$db = config::getConnexion();
+			$req=$db->prepare($sql);
+			$req->bindValue(':post', $post);
+			try{
+				$req->execute();
+			}
+			catch(Exception $e){
+				die('Erreur:'. $e->getMeesage());
+			}
+		}
+
+
+        function modifierpost($post, $idpost){
+			try {
+				$db = config::getConnexion();
+				$query = $db->prepare(
+					'UPDATE post SET 
+						nameuser= :nameuser, 
+						content= :content, 
+						title= :title, 
+						date= :date,
+						imageurl= :imageurl
+					WHERE Idpost= :Idpost'
+				);
+				$query->execute([
+					'nameuser' => $post->getnameuser(),
+					'content' => $post->getcontent(),
+					'title' => $post->gettitle(),
+					'date' => $post->getdate(),
+					'imageurl' => $post->getimageurl(),
+					'Idpost' => $idpost
+				]);
+				echo $query->rowCount() . " records UPDATED successfully <br>";
+			} catch (PDOException $e) {
+				$e->getMessage();
+			}
+		}
+
     }
     
 ?>
