@@ -66,10 +66,9 @@
 
         function activeStateCourse($courseID){
             $db = config::getConnexion();
-            $query = $db->prepare('UPDATE courses SET etat= 1 WHERE courseID= :courseID');
+            $query = $db->prepare("UPDATE courses SET etat= 1 WHERE courseID= :courseID");
             $query->execute(['courseID' => $courseID]);
             echo $query->rowCount() . " records UPDATED successfully <br>";
-
 
         }
 
@@ -122,7 +121,7 @@
 				echo $e->getMessage();
 			}
         }
-
+        
     }
     
 ?>

@@ -1441,6 +1441,12 @@
                                         <input name="courseIDD" type="hidden"
                                             value="<?php echo $Fcourse['courseID'] ?>">
                                     </form>
+                                
+                                    <form action="./uploadVideo.php" method="POST">
+                                        <input class="btn btn-warning" type="submit" value="upload video">
+                                        <input type="hidden" name="courseID" value="<?=$Fcourse['courseID']?>">
+                                    </form>
+                                
                                 </td>
                             </tr>
                             <?php } ?>

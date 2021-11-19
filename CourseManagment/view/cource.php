@@ -130,13 +130,29 @@
                     <div style="margin-bottom: 5%; height: 650px !important;" class="single_special_cource">
                         <img src="./../../img/special_cource_1.png" class="special_img" alt="">
                         <div class="special_cource_text">
-                            <a href="course-details.html" class="btn_4">
-                                <?php echo $course['categorie'] ?>
-                            </a>
-                            <h4>
+                            <div class="row">
+
+                                <div class="col-8">
+                                <form  action="./course-details.php" method="post">
+                                    <button href="course-details.html" class="btn_4">
+                                        <?php echo $course['categorie'] ?>
+                                    </button>
+                                    <input type="hidden" value="<?php echo $course['courseID'] ?>" name="courseID" id="">
+                                    <input type="hidden" value="<?php echo $course['vidExt'] ?>" name="vidExt" id="">
+                                </form>
+                                </div>
+
+                                <div class="col-4">
+                                <h4 style="padding-bottom:50px">
                                 <?php echo $course['price'] ." DT" ?>
                             </h4>
-                            <a href="course-details.html">
+                                </div>
+                            </div>
+       
+
+      
+
+                            <a href="./../../course-details.php">
                                 <h3>
                                     <?php echo $course['title'] ?>
                                 </h3>
