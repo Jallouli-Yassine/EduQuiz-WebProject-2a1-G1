@@ -1,4 +1,5 @@
 <?php 
+	include '../Controllers/postController.php';
     require_once"./../controllers/postController.php";
     require_once"./../model/modelPost.php";
 
@@ -34,7 +35,12 @@
                 header("Location:./forum.php");
             }
         }
+      
+
+	$postC=new PostC();
+	$listepost=$postC->afficherpost(); 
 ?>
+
 
 
 <!doctype html>
@@ -257,7 +263,54 @@
     <!--::blog_part end::-->
 
     <!--::review_part start::-->
-
+  <!--::review_part start::-->
+    <section class="special_cource padding_top">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-5">
+                    <div class="section_tittle text-center">
+                        <h2>Recent posts</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                
+                   
+                        <?php
+				foreach($listepost as $post){
+			?>
+			<div class="col-sm-6 col-lg-4">
+                <div class="single_special_cource">
+			
+                        <img src="img/special_cource_1.png" class="special_img" alt="">
+                        <div class="special_cource_text">
+                            <a href="course-details.html" class="btn_4"><?php echo $post['nameuser']; ?></a>
+                            <h4> <?php echo $post['date']; ?></h4>
+                            <a href="course-details.html">
+                                <h3><?php echo $post['title']; ?></h3>
+                            </a>
+                            <p><?php echo $post['content']; ?></p>
+                            <div class="author_info">
+                                <div class="author_img">
+                                    <img src="img/author/author_1.png" alt="">
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                        <?php
+				}
+			?>
+                   
+               
+                
+                
+                
+            </div>
+        </div>
+    </section> 
 
     <!-- footer part start-->
     <footer class="footer-area">
