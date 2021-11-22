@@ -1394,7 +1394,7 @@
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >courseID</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >ProfID</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >Title</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >etat</th>
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >state</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >#</th>
                             </tr>
                             <?php if( !empty($myCourses) ){ ?>

@@ -1407,13 +1407,13 @@
                 <div class="row">
 
                     <div class="col-lg-12">
-                        <h2 style="text-align:center;">course desactive</h2>
+                        <h2 style="text-align:center;">pending courses</h2>
                         <table style="border:0px solid grey;text-align:center" class="table">
                             <tr style="border-bottom: 0px solid grey;">
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">courseID</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">ProfID</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">Title</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">etat</th>
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">state</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">#</th>
 
                             </tr>
@@ -1431,12 +1431,14 @@
                                     <?php echo $Fcourse['title'] ?>
                                 </td>
                                 <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $Fcourse['etat'] ?>
+                                <div   style="padding:5px;width:100%;margin-bottom:0" class="alert alert-warning" role="alert">
+                                    pending
+                                    </div>
                                 </td>
                                 <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
                                     <form action="./updateStateCourse.php" method="POST">
                                         <input style="float : left;margin-right:5%;margin-left:5%"
-                                            class="btn btn-primary" type="submit" value="ACTIVATE COURSE">
+                                            class="btn btn-info" type="submit" value="ACTIVATE COURSE">
                                         <input name="courseIDp" type="hidden"
                                             value="<?php echo $Fcourse['courseID'] ?>">
                                     </form>
@@ -1455,14 +1457,14 @@
                         </table>
                     </div>
                     <div class="col-lg-12">
-                        <h2 style="text-align:center;">course deja active</h2>
+                        <h2 style="text-align:center;">active courses</h2>
                         <table style="border:0px solid grey;text-align:center" class="table">
                             <tr style="border-bottom: 0px solid grey;">
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">courseID</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">ProfID</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">Title</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">etat</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">#</th>
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">state</th>
+                  
                             </tr>
 
                             <?php foreach($coursActivé as $Tcourse) {?>
@@ -1477,7 +1479,9 @@
                                     <?php echo $Tcourse['title'] ?>
                                 </td>
                                 <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $Tcourse['etat'] ?>
+                                <div   style="padding:5px;width:100%;margin-bottom:0" class="alert alert-success" role="alert">
+                                    accepted
+                                    </div>
                                 </td>
 
                             </tr>
