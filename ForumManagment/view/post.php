@@ -37,6 +37,14 @@
       
 $postC=new PostC();
 $listepost=$postC->afficherpost(); 
+
+$postC=new PostC();
+$id = (int) $_GET['id'];
+$listepostbyid=$postC->afficherpostById($id); 
+
+
+
+
 ?>
 
 
@@ -76,6 +84,7 @@ $listepost=$postC->afficherpost();
 </head>
 
 <content>
+
     <!--::header part start::-->
     <header class="main_menu single_page_menu">
         <div class="container">
@@ -173,44 +182,74 @@ $listepost=$postC->afficherpost();
                                
                                 <div class="d-flex flex-column mr-auto">
                                     <div class="title">
-                                        <span class="username"><?php echo $_POST['nameuser']; ?><span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  
+			
                                     </div>
                                 </div>
                                 <div class="widget-options">
-                                    <div class="dropdown">
-                                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
+                                    <!--div class="dropdown">
+                                    <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
                                             <i class="la la-ellipsis-h"></i>
                                         </button>
                                         <div class="dropdown-menu">
                                             <a href="#" class="dropdown-item">
                                                 <i class="la la-edit"></i>Edit Post
                                             </a>
-                                            <a href="#" class="dropdown-item">
+                                            <a class="dropdown-item">
+                                                <i class="la la-trash"></i>Delete Post
+                                            </a>
+                                        </div-->
+                                        <?php
+				foreach($listepost as $post){
+                    if ($post['idpost'] == $id) {
+                      
+			?>
+           <div class="special_cource_text">
+           <div class="d-flex flex-column mr-auto">
+                                    <div class="title">
+                                    <h2><?php echo $post['nameuser']; ?></a><h2>
+                                    </div>
+                                </div>
+                            
+                            <p> <?php echo $post['date']; ?></p>
+                            <div class="widget-body">
+                                <p>
+                                <h3><?php echo $post['title']; ?></h3>
+                            
+                            <p><?php echo $post['content']; ?></p>
+                                </p>
+                            </div>
+                            <div class="dropdown">
+                                    <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
+                                            <i class="la la-ellipsis-h"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a href="updateForum.php?idpost=<?php echo $post['idpost']; ?>" class="dropdown-item">
+                                                <i class="la la-edit"></i>Edit Post
+                                            </a>
+                                            <a href="deleteForum.php?idpost=<?php echo $post['idpost']; ?>" class="dropdown-item">
                                                 <i class="la la-trash"></i>Delete Post
                                             </a>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-
-
-                            <div class="widget-body">
-                            <p><?php echo $_post['content']; ?></p>
-                            </div>
-                            <div class="widget-footer d-flex align-items-center">
                                 
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                             <div class="col-xl-4 col-md-4 col-5 no-padding d-flex justify-content-end">
-                                    <div class="meta">
-                                        <ul>
-                                          <li><a href="#"><i class="la la-comment"></i><span class="numb">3</span></a></li>
-                                        </ul>
+            <?php
+				}
+            }
+			?>
+
                                     </div>
                                 </div>
+                            </div>
+
+
+                 
+
+
+
+                            
+                            
+                                
+                             
                             </div>
                         </div>
                         
@@ -252,13 +291,20 @@ $listepost=$postC->afficherpost();
                             <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="form-outline">
-                                    <input class="form-control" name="title" id="title" type="text"
-                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter The Title'"
-                                        placeholder='Enter The Title'>
-                                    <label class="form-label" for="Title">Enter your comment</label>
+                                <textarea class="form-control" name="comment" id="comment" type="text"
+                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter The Comment'"
+                                        placeholder='Enter The Comment' rows="3"></textarea>
+
+                                       
+
+                                    <label class="form-label" for="comment">Enter your comment</label>
+                                   
                                 </div>
                                 <small id="errorTitle"></small>
+                                <br>  <a href="course-details.html" class="btn_4">Comment</a>
                             </div>
+                           
+                           
                         </div>
                               <!--  <div class="content-img">
                                     <a href="#"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="img-fluid" alt="..."></a>
@@ -268,11 +314,18 @@ $listepost=$postC->afficherpost();
                             <div class="widget-footer d-flex align-items-center">
                                 <div class="col no-padding d-flex justify-content-start">
                                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
-<div class="container mt-3 mb-4">
+
+
+
+<!-- kifeh chyodhhrou l comments 
+
+
+
+                                    <div class="container mt-3 mb-4">
 <div class="col-lg-9 mt-4 mt-lg-0">
     <div class="row">
       <div class="col-md-12">
-        <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm">
+        <div class="user-dashboard-info-box table-responsive mb-40 bg-white p-40 shadow-sm">
           <table class="table manage-candidates-top mb-0">
           
             <tbody>
@@ -294,7 +347,6 @@ $listepost=$postC->afficherpost();
                 </td>
                 <td>
                   <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                    <li><a href="#" class="text-primary" data-toggle="tooltip" title="" data-original-title="view"><i class="far fa-eye"></i></a></li>
                     <li><a href="#" class="text-info" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
                     <li><a href="#" class="text-danger" data-toggle="tooltip" title="" data-original-title="Delete"><i class="far fa-trash-alt"></i></a></li>
                   </ul>
@@ -320,7 +372,6 @@ $listepost=$postC->afficherpost();
                 </td>
                 <td>
                   <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                    <li><a href="#" class="text-primary" data-toggle="tooltip" title="" data-original-title="view"><i class="far fa-eye"></i></a></li>
                     <li><a href="#" class="text-info" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
                     <li><a href="#" class="text-danger" data-toggle="tooltip" title="" data-original-title="Delete"><i class="far fa-trash-alt"></i></a></li>
                   </ul>
@@ -345,7 +396,6 @@ $listepost=$postC->afficherpost();
                 </td>
                 <td>
                   <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                    <li><a href="#" class="text-primary" data-toggle="tooltip" title="" data-original-title="view"><i class="far fa-eye"></i></a></li>
                     <li><a href="#" class="text-info" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
                     <li><a href="#" class="text-danger" data-toggle="tooltip" title="" data-original-title="Delete"><i class="far fa-trash-alt"></i></a></li>
                   </ul>
@@ -369,7 +419,11 @@ $listepost=$postC->afficherpost();
       </div>
     </div>
   </div>
-</div>
+</div>    -->
+
+
+
+
                                   <!--  <div class="users-like">
                                         <a href="#">
                                             <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="img-fluid rounded-circle" alt="...">

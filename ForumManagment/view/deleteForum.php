@@ -1,6 +1,7 @@
 <?php
-	include '../Controller/PostC.php';
+	include '../Controllers/postController.php';
 	$postC=new PostC();
-	$postC->supprimerpost($_GET["post"]);
-	header('Location:displayForum.php');
+
+$postC->supprimerpost($_GET["idpost"]);
+header('Location:addPost.php');
 ?>

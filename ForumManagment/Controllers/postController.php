@@ -23,7 +23,7 @@
                     'imageurl' => $post->getimageurl(),
                 ]);
 
-            } catch(Exception $e){
+            } catch(Exception $e){   
 				$e->getMessage();
 			}
         }
@@ -40,12 +40,24 @@
 			}
 		}
 
+		function afficherpostByid($idpost){
+			$sql="SELECT * FROM post WHERE idpost =.$idpost";
+			$db = config::getConnexion();
+			try{
+				$liste = $db->query($sql);
+				return $liste;
+			}
+			catch(Exception $e){
+				die('Erreur:'. $e->getMeesage());
+			}
+		}
 
-        function supprimerpost($post){
-			$sql="DELETE FROM post WHERE post=:post";
+
+        function supprimerpost($idpost){
+			$sql="DELETE FROM post WHERE idpost=:idpost";
 			$db = config::getConnexion();
 			$req=$db->prepare($sql);
-			$req->bindValue(':post', $post);
+			$req->bindValue(':idpost', $idpost);
 			try{
 				$req->execute();
 			}
@@ -60,19 +72,22 @@
 				$db = config::getConnexion();
 				$query = $db->prepare(
 					'UPDATE post SET 
-						nameuser= :nameuser, 
-						content= :content, 
 						title= :title, 
-						date= :date,
+						content= :content
 						imageurl= :imageurl
-					WHERE Idpost= :Idpost'
+						nameuser= :nameuser
+						date= :date
+						iduser= :iduser
+						
+					WHERE idpost= :idpost'
 				);
 				$query->execute([
-					'nameuser' => $post->getnameuser(),
-					'content' => $post->getcontent(),
 					'title' => $post->gettitle(),
-					'date' => $post->getdate(),
+					'content' => $post->getcontent(),
 					'imageurl' => $post->getimageurl(),
+					'nameuser' => $post->getnameuser(),
+					'date' => $post->getdate(),
+					'Iduser' => $post->getIduser(),
 					'Idpost' => $idpost
 				]);
 				echo $query->rowCount() . " records UPDATED successfully <br>";
@@ -80,7 +95,24 @@
 				$e->getMessage();
 			}
 		}
+		
+		function recupererpost($idpost){
+			$sql="SELECT * from post where idpost=$idpost";
+			$db = config::getConnexion();
+			try{
+				$query=$db->prepare($sql);
+				$query->execute();
+	
+				$post=$query->fetch();
+				return $post;
+			}
+			catch (Exception $e){
+				die('Erreur: '.$e->getMessage());
+			}
+		}
 
     }
+
+	
     
 ?>

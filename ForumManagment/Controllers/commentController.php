@@ -5,8 +5,8 @@
     class CommentC{
 
         function ajouterComment($comment){
-            $sql = "INSERT INTO post(Idcomment,Iduser,nameuser,content,date,Idpost)
-            VALUES(:Idcomment,:Iduser,:nameuser,:content,:date,:Idpost)";
+            $sql = "INSERT INTO c$comment(Idcomment,Iduser,nameuser,content,date,Idc$comment)
+            VALUES(:Idcomment,:Iduser,:nameuser,:content,:date,:Idc$comment)";
 
             $db = config::getConnexion();
             try {
@@ -14,12 +14,12 @@
                 $query = $db->prepare($sql);
                 
                 $query->execute([
-                    'Idcomment' => $post->getIdpost(),
-                    'Iduser' => $post->getIduser(),
-                    'nameuser' => $post->getnameuser(),
-                    'content' => $post->getcontent(),
-                    'date' => $post->getdate(),
-                    'Idcomment' => $post->getIdcomment(),
+                    'Idcomment' => $comment->getIdcomment(),
+                    'Iduser' => $comment->getIduser(),
+                    'nameuser' => $comment->getnameuser(),
+                    'content' => $comment->getcontent(),
+                    'date' => $comment->getdate(),
+                    'Idpost' => $comment->getIdcomment(),
                 ]);
 
             } catch(Exception $e){
@@ -40,11 +40,11 @@
 		}
 
 
-        function supprimercomment($comment){
-			$sql="DELETE FROM comment WHERE comment=:comment";
+        function supprimercomment($idcomment){
+			$sql="DELETE FROM comment WHERE idcomment=:idcomment";
 			$db = config::getConnexion();
 			$req=$db->prepare($sql);
-			$req->bindValue(':comment', $comment);
+			$req->bindValue(':idcomment', $idcomment);
 			try{
 				$req->execute();
 			}
@@ -62,12 +62,14 @@
 						nameuser= :nameuser, 
 						content= :content, 
 						date= :date,
+						idpost= :idpost,
 					WHERE Idcomment= :Idcomment'
 				);
 				$query->execute([
 					'nameuser' => $comment->getnameuser(),
 					'content' => $comment->getcontent(),
 					'date' => $comment->getdate(),
+					'idpost'  => $comment->getidpost(),
 					'Idcomment' => $idcommennt
 				]);
 				echo $query->rowCount() . " records UPDATED successfully <br>";

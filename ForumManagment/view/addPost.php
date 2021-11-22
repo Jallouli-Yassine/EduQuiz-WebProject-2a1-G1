@@ -37,6 +37,12 @@
         }
       
 
+        function redirect($url) {
+            ob_start();
+            header('Location: '.$url);
+            ob_end_flush();
+            die();
+        }
 	$postC=new PostC();
 	$listepost=$postC->afficherpost(); 
 ?>
@@ -159,8 +165,7 @@
     <section class="special_cource padding_top">
         <center>
             <div class="col-lg-8">
-                <form class="form-contact contact_form" action="" method="POST" id="contactForm"
-                    novalidate="novalidate">
+                <form class="form-contact contact_form" action="" method="POST" id="contactForm" novalidate="novalidate">
                     <div class="row">
 
                                     <input  value="50"  type="hidden" name="Idpost" id="Idpost" class="form-control" />
@@ -295,6 +300,12 @@
                                     <img src="img/author/author_1.png" alt="">
                                     
                                 </div>
+                                <div class="form-group mt-3">
+                                <form method="POST" action="post.php?id=<?php echo $post['idpost'] ?>">
+                        <button type="submit" class="add_course button button-contactForm btn_1" style="height: 50px">details</button>
+                                 </form>
+                    </div>
+
                                 
                             </div>
                         </div>
