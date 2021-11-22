@@ -71,6 +71,14 @@
             echo $query->rowCount() . " records UPDATED successfully <br>";
 
         }
+        
+        function desactivéStateCourse($courseID){
+            $db = config::getConnexion();
+            $query = $db->prepare("UPDATE courses SET etat= 0 WHERE courseID= :courseID");
+            $query->execute(['courseID' => $courseID]);
+            echo $query->rowCount() . " records UPDATED successfully <br>";
+
+        }
 
         function deleteCourse($courseID){
             $db = config::getConnexion();
@@ -107,6 +115,18 @@
 			}
 		}
 
+        function getProfCourses() {
+			$sql="SELECT * from courses WHERE profID = 8";
+			$db = config::getConnexion();
+			try{
+                $liste = $db->query($sql);
+                return $liste;
+			}
+			catch (Exception $e){
+				echo $e->getMessage();
+			}
+        }
+        
         function getOneCourse($courseID) {
 			$sql="SELECT * from courses where courseID=$courseID";
 			$db = config::getConnexion();

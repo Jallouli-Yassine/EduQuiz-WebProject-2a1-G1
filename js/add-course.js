@@ -1,12 +1,12 @@
 /* FROM JallouliY BRANCH */
-"use strict";
+
 
 let error = 0;
 const btn = document.querySelector('.add_course');
 const TitleInput = document.querySelector('#Title');
 const PriceInput = document.querySelector('#Price');
 const DescriptionInput = document.querySelector('#Description');
-const VideoInput = document.querySelector('#Video');
+//const VideoInput = document.querySelector('#Video');
 const ImageInput = document.querySelector('#Image');
 
 
@@ -41,15 +41,13 @@ let inputRequired = (inputValue, errorID, nameRequired) => {
     } else
         document.getElementById(`${errorID}`).innerHTML = "";
 }
-
-document.getElementById('contactForm').addEventListener("submit", (e) => {
-
+document.getElementById("addCourse").addEventListener('submit', (e) => {
     error = 0;
     inputRequired(TitleInput.value, "errorTitle", "TITLE");
     inputRequired(PriceInput.value, "errorPrice", "Price");
     inputRequired(DescriptionInput.value, "errorDescription", "DESCRIPTION");
     ImageExt(ImageInput.value);
-    VidExt(VideoInput.value);
+    // VidExt(VideoInput.value);
     //alert(error);
     if (error > 0)
         e.preventDefault();

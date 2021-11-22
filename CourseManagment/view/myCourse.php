@@ -1,9 +1,13 @@
 <?php 
     require_once "./../controllers/CourseController.php";
     $courseC = new CourseC();
-    $coursActivé=$courseC->getTrueCourses(1);
-    $listeDesactivé=$courseC->getFalseCourses(0);
+    $myCourses= $courseC->getProfCourses();
+ 
 
+	
+    //$listeCourse=$courseC->afficherCourses();
+
+    //$listeCourse=$courseC->afficherCourses();
 
 ?>
 
@@ -18,9 +22,11 @@
 
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- favicon
 		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="./../../EDu-Quiz B/img/favicon.ico">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+        <link rel="shortcut icon" type="image/x-icon" href="./../../EDu-Quiz B/img/favicon.ico">
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
@@ -1372,115 +1378,70 @@
                 </div>
             </div>
             <!-- Mobile Menu end -->
-            <div class="breadcome-area">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="breadcome-list">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="breadcome-heading">
-                                            <form role="search" class="sr-input-func">
-                                                <input type="text" placeholder="Search..."
-                                                    class="search-int form-control">
-                                                <a href="#"><i class="fa fa-search"></i></a>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <ul class="breadcome-menu">
-                                            <li><a href="#">Home</a> <span class="bread-slash">/</span>
-                                            </li>
-                                            <li><span class="bread-blod">All Courses</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
-        <div  style="height:100vh; width:95%;  background-color:white; padding:5% 5% 5% 5%" class="courses-area container-fluid">
+        <div style="height:100vh; width:95%;  background-color:white; padding:10% 10% 10% 10%" class="courses-area container-fluid">
             <div class="container-fluid">
                 <div class="row">
 
+
+
+ 
                     <div class="col-lg-12">
-                        <h2 style="text-align:center;">course desactive</h2>
-                        <table style="border:0px solid grey;text-align:center" class="table">
+                        <h2 style="text-align:center;padding:0 0 2% 0">MY COURSES</h2>
+                        <table  style="border:0px solid grey;text-align:center" class="table">
                             <tr style="border-bottom: 0px solid grey;">
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">courseID</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">ProfID</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">Title</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">etat</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">#</th>
-
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >courseID</th>
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >ProfID</th>
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >Title</th>
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >etat</th>
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >#</th>
                             </tr>
-                          
-                            <?php foreach($listeDesactivé as $Fcourse) {?>
-                                <?php if( $Fcourse['video_url']!="") { ?>
-                            <tr>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $Fcourse['courseID'] ?>
-                                </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $Fcourse['profID'] ?>
-                                </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $Fcourse['title'] ?>
-                                </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $Fcourse['etat'] ?>
-                                </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <form action="./updateStateCourse.php" method="POST">
-                                        <input style="float : left;margin-right:5%;margin-left:5%"
-                                            class="btn btn-primary" type="submit" value="ACTIVATE COURSE">
-                                        <input name="courseIDp" type="hidden"
-                                            value="<?php echo $Fcourse['courseID'] ?>">
-                                    </form>
-                                    <form action="./deleteCourse.php" method="post">
-                                        <input style="float : left;margin-right:5%;margin-left:5% margin-right:10px"
-                                            class="btn btn-danger" type="submit" value="Decline">
-                                        <input name="courseIDD" type="hidden"
-                                            value="<?php echo $Fcourse['courseID'] ?>">
-                                    </form>
+                            <?php if( !empty($myCourses) ){ ?>
+                            <?php foreach($myCourses as $course) { ?>
+                               
 
-                                
+                            <tr>
+                                <td   style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                    <?php echo $course["courseID"] ?>
+                                </td>
+                                <td  style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                    <?php echo $course['profID'] ?>
+                                </td>
+                                <td  style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                    <?php echo $course['title'] ?>
+                                </td>
+                                <td  style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                <?php if($course['etat']==0) { ?>
+                                    <div   style="padding:5px;width:100%;margin-bottom:0" class="alert alert-warning" role="alert">
+                                    pending
+                                    </div>
+                                    <?php }else if($course['etat']==1){ ?>
+
+                                    <div   style="padding:5px;width:100%;margin-bottom:0" class="alert alert-success" role="alert">
+                                    accepted
+                                    </div>
+                                        <?php }else{ ?>
+                                            <div   style="padding:5px;width:100%;margin-bottom:0" class="alert alert-danger" role="alert">
+                                    must upload video
+                                    </div>
+                                            <?php } ?>
+                                </td>
+                                <td style="width:400px; padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                    <form  action="./update-course.php" method="POST">
+                                        <input style="float : right;margin-right:50px;" class="btn btn-warning" type="submit" value="update">
+                                    
+                                        <input type="hidden" name="courseID" value="<?=$course['courseID']?>">
+                                    </form>
+                                    <?php if($course['video_url']=="") { ?>
+                                    <form  action="./upload-video.php" method="POST">
+                                        <input style="float : right;margin-right:70px;" class="btn btn-danger" type="submit" value="must upload video">
+                                        <input type="hidden" name="courseID" value="<?=$course['courseID']?>">
+                                    </form>
+                                    <?php } ?>
                                 </td>
                             </tr>
                             <?php } ?>
-                            <?php } ?>
-                        </table>
-                    </div>
-                    <div class="col-lg-12">
-                        <h2 style="text-align:center;">course deja active</h2>
-                        <table style="border:0px solid grey;text-align:center" class="table">
-                            <tr style="border-bottom: 0px solid grey;">
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">courseID</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">ProfID</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">Title</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">etat</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">#</th>
-                            </tr>
-
-                            <?php foreach($coursActivé as $Tcourse) {?>
-                            <tr>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $Tcourse['courseID'] ?>
-                                </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $Tcourse['profID'] ?>
-                                </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $Tcourse['title'] ?>
-                                </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $Tcourse['etat'] ?>
-                                </td>
-
-                            </tr>
                             <?php } ?>
                         </table>
                     </div>

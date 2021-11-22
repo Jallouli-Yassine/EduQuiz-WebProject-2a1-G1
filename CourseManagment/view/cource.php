@@ -134,7 +134,7 @@
 
                                 <div class="col-8">
                                 <form  action="./course-details.php" method="post">
-                                    <button href="course-details.html" class="btn_4">
+                                    <button href="course-details.php" class="btn_4">
                                         <?php echo $course['categorie'] ?>
                                     </button>
                                     <input type="hidden" value="<?php echo $course['courseID'] ?>" name="courseID" id="">

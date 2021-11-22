@@ -1,10 +1,43 @@
 <?php 
-    require_once "./../controllers/CourseController.php";
-    $courseC = new CourseC();
-    $coursActivé=$courseC->getTrueCourses(1);
-    $listeDesactivé=$courseC->getFalseCourses(0);
+    require_once"./../controllers/CourseController.php";
+    require_once"./../model/courseModel.php";
 
+         $course = null;
+         $courseC = new CourseC();
+        
+         if( 
+            
+              isset($_POST['courseID']) 
+           &&  isset($_POST['Title']) 
+           && isset($_POST['Price']) 
+           && isset($_POST['Description']) 
 
+           ){
+
+       if( 
+          
+           !empty($_POST['courseID'])&&
+           !empty($_POST['Title'])&&
+           !empty($_POST['Price'])&&
+           !empty($_POST['Description'])
+
+           )
+            {
+                $course = new Course(
+                $_POST['profID'],
+                $_POST['Categorie'],
+                $_POST['Title'],
+                $_POST['Price'],
+                $_POST['Description'],
+                $_POST['videoUrl'],
+                $_POST['imageUrl'],1);
+
+                $courseC->modifierCourse($course,$_POST['courseID']);
+                $courseC->desactivéStateCourse($_POST['courseID']);
+                header("Location:./myCourse.php");
+            }else
+            echo "ERROR";
+        }
 ?>
 
 <!doctype html>
@@ -13,14 +46,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>All Courses | Kiaalap - Kiaalap Admin Template</title>
+    <title>Add Course | Kiaalap - Kiaalap Admin Template</title>
     <meta name="description" content="">
-
-    
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
 		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="./../../EDu-Quiz B/img/favicon.ico">
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
@@ -47,6 +79,9 @@
     <!-- main CSS
 		============================================ -->
     <link rel="stylesheet" href="./../../EDu-Quiz B/css/main.css">
+    <!-- dropzone CSS
+		============================================ -->
+    <link rel="stylesheet" href="./../../EDu-Quiz B/css/dropzone/dropzone.css">
     <!-- educate icon CSS
 		============================================ -->
     <link rel="stylesheet" href="./../../EDu-Quiz B/css/educate-custon-icon.css">
@@ -64,6 +99,9 @@
 		============================================ -->
     <link rel="stylesheet" href="./../../EDu-Quiz B/css/calendar/fullcalendar.min.css">
     <link rel="stylesheet" href="./../../EDu-Quiz B/css/calendar/fullcalendar.print.min.css">
+    <!-- forms CSS
+		============================================ -->
+    <link rel="stylesheet" href="./../../EDu-Quiz B/css/form/all-type-forms.css">
     <!-- style CSS
 		============================================ -->
     <link rel="stylesheet" href="./../../EDu-Quiz B/style.css">
@@ -72,7 +110,7 @@
     <link rel="stylesheet" href="./../../EDu-Quiz B/css/responsive.css">
     <!-- modernizr JS
 		============================================ -->
-    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="./../../EDu-Quiz B/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
 <body>
@@ -1220,8 +1258,7 @@
                                         <li><a data-toggle="collapse" data-target="#democrou" href="#">Courses <span
                                                     class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul id="democrou" class="collapse dropdown-header-top">
-                                                <li>
-                                                    <a href="./all-courses.php">All Courses</a>
+                                                <li><a href="all-courses.html">All Courses</a>
                                                 </li>
                                                 <li><a href="add-course.php">Add Course</a>
                                                 </li>
@@ -1376,7 +1413,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="breadcome-list">
+                            <div class="breadcome-list single-page-breadcome">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="breadcome-heading">
@@ -1391,7 +1428,7 @@
                                         <ul class="breadcome-menu">
                                             <li><a href="#">Home</a> <span class="bread-slash">/</span>
                                             </li>
-                                            <li><span class="bread-blod">All Courses</span>
+                                            <li><span class="bread-blod">Add Courses</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -1402,91 +1439,203 @@
                 </div>
             </div>
         </div>
-        <div  style="height:100vh; width:95%;  background-color:white; padding:5% 5% 5% 5%" class="courses-area container-fluid">
+        <!-- Single pro tab review Start-->
+        <div class="single-pro-review-area mt-t-30 mg-b-15">
             <div class="container-fluid">
                 <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="product-payment-inner-st">
+                            <ul id="myTabedu1" class="tab-review-design">
+                                <li class="active"><a href="#description">Courses Details</a></li>
+                                <li><a href="#reviews"> Acount Information</a></li>
+                                <li><a href="#INFORMATION">Social Information</a></li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content custom-product-edit">
+                                <div class="product-tab-list tab-pane fade active in" id="description">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                                                <div id="dropzone1" class="pro-ad addcoursepro">
+                                                    <center>
+                                                        <div class="col-lg-8">
+                                                                        
+                                        <?php
+                                            if (isset($_POST['courseID'])){
+                                                $course = $courseC->getOneCourse($_POST['courseID']);
+                                        ?>
+                <form class="form-contact contact_form" action="" method="POST" id="contactForm"
+                    novalidate="novalidate">
+              
 
-                    <div class="col-lg-12">
-                        <h2 style="text-align:center;">course desactive</h2>
-                        <table style="border:0px solid grey;text-align:center" class="table">
-                            <tr style="border-bottom: 0px solid grey;">
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">courseID</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">ProfID</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">Title</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">etat</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">#</th>
-
-                            </tr>
-                          
-                            <?php foreach($listeDesactivé as $Fcourse) {?>
-                                <?php if( $Fcourse['video_url']!="") { ?>
-                            <tr>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $Fcourse['courseID'] ?>
-                                </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $Fcourse['profID'] ?>
-                                </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $Fcourse['title'] ?>
-                                </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $Fcourse['etat'] ?>
-                                </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <form action="./updateStateCourse.php" method="POST">
-                                        <input style="float : left;margin-right:5%;margin-left:5%"
-                                            class="btn btn-primary" type="submit" value="ACTIVATE COURSE">
-                                        <input name="courseIDp" type="hidden"
-                                            value="<?php echo $Fcourse['courseID'] ?>">
-                                    </form>
-                                    <form action="./deleteCourse.php" method="post">
-                                        <input style="float : left;margin-right:5%;margin-left:5% margin-right:10px"
-                                            class="btn btn-danger" type="submit" value="Decline">
-                                        <input name="courseIDD" type="hidden"
-                                            value="<?php echo $Fcourse['courseID'] ?>">
-                                    </form>
-
+                    <div class="row">
+                    <div class="col-12">
+                    <input  value="50"  type="hidden" name="profID" id="profID" class="form-control" />
+                            <select style="margin-bottom :3%" class="form-select" name="Categorie" aria-label="Default select example">
+                                <option selected><?php echo $course['categorie']?></option>
+                                <option value="programation">programation</option>
+                                <option value="photography">photography</option>
+                                <option value="design">design</option>
+                                <option value="math">math</option>
                                 
-                                </td>
-                            </tr>
-                            <?php } ?>
-                            <?php } ?>
-                        </table>
+                            </select>
+
+
+
+                            <small id="errorCategories"></small>
+
+                        </div>
+
+                            
+                                    <input value="<?php echo $course['courseID']?>" class="form-control"
+                                        name="courseID" id="courseID" type="hidden" onfocus="this.placeholder = ''"
+                                        onblur="this.placeholder = 'Enter The courseID'"
+                                        placeholder='Enter The courseID'>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="form-outline">
+                                    <label class="form-label" for="Title">Enter The Title</label>
+                                    <input value="<?php echo $course['title']?>" class="form-control" name="Title" id="Title" type="text"
+                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter The Title'"
+                                        placeholder='Enter The Title'>
+                                </div>
+                                <small id="errorTitle"></small>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="form-outline">
+                                    <label class="form-label" for="Price">Enter The Price</label>
+                                    <input value="<?php echo $course['price']?>" name="Price" type="number" id="Price" class="form-control" min="0" />
+                                </div>
+
+                                <div class="error">
+                                    <small id="errorPrice"></small>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <div class="form-outline">
+                                    <label class="form-label" for="Description">Enter The Course Description</label>
+                                    <textarea   name="Description" class="form-control" id="Description"
+                                        rows="4"><?php echo $course['Descrip']?></textarea>
+                                </div>
+                                <small id="errorDescription"></small>
+                            </div>
+                        </div>
+                        <input type="hidden" name="videoUrl" value="<?php echo $course['video_url']?>" id="">
+                        <input type="hidden" name="imageUrl" value="<?php echo $course['picture_url']?>" id="">
+
+                                                <!--
+                        <div class="col-6">
+                            <div class="form-group">
+
+                                <input   name="videoUrl" type="file" class="form-control" id="Video" />
+                                <label class="form-label" for="Video">Pick The Video File</label>
+                                <small id="errorVideoExt"></small>
+                            </div>
+
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group">
+
+                                <label class="form-label" for="Image">Pick The Image Of The Video</label>
+                                <input   name="imageUrl" type="file" class="form-control" id="Image" />
+                                <small id="errorImageExt"></small>
+                            </div>
+
+                        </div>
+                                                -->
+
+
                     </div>
-                    <div class="col-lg-12">
-                        <h2 style="text-align:center;">course deja active</h2>
-                        <table style="border:0px solid grey;text-align:center" class="table">
-                            <tr style="border-bottom: 0px solid grey;">
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">courseID</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">ProfID</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">Title</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">etat</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">#</th>
-                            </tr>
-
-                            <?php foreach($coursActivé as $Tcourse) {?>
-                            <tr>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $Tcourse['courseID'] ?>
-                                </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $Tcourse['profID'] ?>
-                                </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $Tcourse['title'] ?>
-                                </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $Tcourse['etat'] ?>
-                                </td>
-
-                            </tr>
-                            <?php } ?>
-                        </table>
+                    <div class="form-group mt-3">
+                        <button type="submit" class="add_course btn btn-warning">update course</button>
                     </div>
-
+                </form>
+                <?php
+                   }	 
+               ?>
+                                                        </div>
+                                                    </center>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-tab-list tab-pane fade" id="reviews">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="devit-card-custom">
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control"
+                                                                    placeholder="Email">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="number" class="form-control"
+                                                                    placeholder="Phone">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="password" class="form-control"
+                                                                    placeholder="Password">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="password" class="form-control"
+                                                                    placeholder="Confirm Password">
+                                                            </div>
+                                                            <a href="#"
+                                                                class="btn btn-primary waves-effect waves-light">Submit</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-tab-list tab-pane fade" id="INFORMATION">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="devit-card-custom">
+                                                            <div class="form-group">
+                                                                <input type="url" class="form-control"
+                                                                    placeholder="Facebook URL">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="url" class="form-control"
+                                                                    placeholder="Twitter URL">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="url" class="form-control"
+                                                                    placeholder="Google Plus">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="url" class="form-control"
+                                                                    placeholder="Linkedin URL">
+                                                            </div>
+                                                            <button type="submit"
+                                                                class="btn btn-primary waves-effect waves-light">Submit</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
         </div>
         <div class="footer-copyright-area">
@@ -1539,12 +1688,30 @@
 		============================================ -->
     <script src="./../../EDu-Quiz B/js/sparkline/jquery.sparkline.min.js"></script>
     <script src="./../../EDu-Quiz B/js/sparkline/jquery.charts-sparkline.js"></script>
-    <script src="./../../EDu-Quiz B/js/sparkline/sparkline-active.js"></script>
     <!-- calendar JS
 		============================================ -->
     <script src="./../../EDu-Quiz B/js/calendar/moment.min.js"></script>
     <script src="./../../EDu-Quiz B/js/calendar/fullcalendar.min.js"></script>
     <script src="./../../EDu-Quiz B/js/calendar/fullcalendar-active.js"></script>
+    <!-- maskedinput JS
+		============================================ -->
+    <script src="./../../EDu-Quiz B/js/jquery.maskedinput.min.js"></script>
+    <script src="./../../EDu-Quiz B/js/masking-active.js"></script>
+    <!-- datepicker JS
+		============================================ -->
+    <script src="./../../EDu-Quiz B/js/datepicker/jquery-ui.min.js"></script>
+    <script src="./../../EDu-Quiz B/js/datepicker/datepicker-active.js"></script>
+    <!-- form validate JS
+		============================================ -->
+    <script src="./../../EDu-Quiz B/js/form-validation/jquery.form.min.js"></script>
+    <script src="./../../EDu-Quiz B/js/form-validation/jquery.validate.min.js"></script>
+    <script src="./../../EDu-Quiz B/js/form-validation/form-active.js"></script>
+    <!-- dropzone JS
+		============================================ -->
+    <script src="./../../EDu-Quiz B/js/dropzone/dropzone.js"></script>
+    <!-- tab JS
+		============================================ -->
+    <script src="./../../EDu-Quiz B/js/tab.js"></script>
     <!-- plugins JS
 		============================================ -->
     <script src="./../../EDu-Quiz B/js/plugins.js"></script>
