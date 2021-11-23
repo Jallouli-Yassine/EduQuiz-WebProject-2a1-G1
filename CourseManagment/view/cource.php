@@ -128,7 +128,30 @@
                 <?php foreach ($listeCourse as $course) {   ?>
                 <div class="col-lg-4">
                     <div style="margin-bottom: 5%; height: 650px !important;" class="single_special_cource">
-                        <img src="./../../img/special_cource_1.png" class="special_img" alt="">
+                    <?php 
+                            
+                            $courseID=$course['courseID'];
+                            include "./../connect.php";
+                            $sql = "SELECT * FROM courses WHERE picture_url= $courseID.";
+                            $res = mysqli_query($conn, $sql);
+                            if (mysqli_num_rows($res) > 0) {
+                                while ($picture = mysqli_fetch_assoc($res)) { 
+                            ?>
+
+                                    <!--
+                                        oncontextmenu="return false;"
+                                    -->
+
+                                    <img  style="height:70%" src="uploads/coursesPictures/<?=$picture['picture_url']?>" alt="">
+
+
+                            <?php 
+                            }
+                            }else {
+                                echo "<h1>no picture yet</h1>";
+                            }
+                            ?>
+                       
                         <div class="special_cource_text">
                             <div class="row">
 

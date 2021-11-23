@@ -1,13 +1,13 @@
 /* FROM JallouliY BRANCH */
 
 
-let error = 0;
+
 const btn = document.querySelector('.add_course');
 const TitleInput = document.querySelector('#Title');
 const PriceInput = document.querySelector('#Price');
 const DescriptionInput = document.querySelector('#Description');
 //const VideoInput = document.querySelector('#Video');
-const ImageInput = document.querySelector('#Image');
+//const ImageInput = document.querySelector('#Image');
 
 
 let ImageExt = (PicName) => {
@@ -46,7 +46,7 @@ document.getElementById("addCourse").addEventListener('submit', (e) => {
     inputRequired(TitleInput.value, "errorTitle", "TITLE");
     inputRequired(PriceInput.value, "errorPrice", "Price");
     inputRequired(DescriptionInput.value, "errorDescription", "DESCRIPTION");
-    ImageExt(ImageInput.value);
+    //ImageExt(ImageInput.value);
     // VidExt(VideoInput.value);
     //alert(error);
     if (error > 0)

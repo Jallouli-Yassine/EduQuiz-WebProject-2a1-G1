@@ -7,7 +7,7 @@
          $course = null;
          $courseC = new CourseC();
 
-         if(isset($_FILES['my_video'])){
+         if( isset($_FILES['my_video']) && isset($_FILES['my_picture'])) {
             require_once"./../connect.php";
 
      /*
@@ -16,28 +16,41 @@
             */
            
             $video_name = $_FILES['my_video']['name'];
-            $tmp_name = $_FILES['my_video']['tmp_name'];
-            $error = $_FILES['my_video']['error'];
+            $picture_name = $_FILES['my_picture']['name'];
+
+            $tmpVid_name = $_FILES['my_video']['tmp_name'];
+            $tmpPic_name = $_FILES['my_picture']['tmp_name'];
+
+            $Perror = $_FILES['my_video']['error'];
+            $Verror = $_FILES['my_picture']['error'];
         
-            if($error === 0 )
+            if($Perror === 0 && $Verror ===0)
             {
                 $courseID=$_POST['courseID'];
                 //get video extension
                 $vid_ext = pathinfo($video_name , PATHINFO_EXTENSION);
+                $pic_ext = pathinfo($picture_name , PATHINFO_EXTENSION);
                 //n7awlo l ext to lowerCase
                 $vid_ext_lc = strtolower($vid_ext);
+                $pic_ext_lc = strtolower($pic_ext);
             
                 //les extensions eli malezemch ndakhlo ghirhom 
-                $allowed_exts = array("mp4" , "webm" , "avi" ,"flv" ,"mkv");
-                if(in_array($vid_ext_lc,$allowed_exts)){
+                $allowed_vid_exts = array("mp4" , "webm" , "avi" ,"flv" ,"mkv");
+                $allowed_pic_exts = array("png" , "jpg" , "jpeg" ,"gif");
+                if(in_array($vid_ext_lc,$allowed_vid_exts)&& in_array($pic_ext_lc,$allowed_pic_exts)){
                     $new_video_name = $courseID. '.' .$vid_ext_lc; 
-                    $video_uploaded_path = 'uploads/' . $new_video_name;
-                    move_uploaded_file($tmp_name,$video_uploaded_path);
+                    $new_pic_name = $courseID. '.' .$pic_ext_lc; 
+
+                    $video_uploaded_path = 'uploads/coursesVideos/' . $new_video_name;
+                    $picture_uploaded_path = 'uploads/coursesPictures/' . $new_pic_name;
+
+                    move_uploaded_file($tmpVid_name,$video_uploaded_path);
+                    move_uploaded_file($tmpPic_name,$picture_uploaded_path);
         
                     // tawa nhezo l vid li uplodineha lel data base :
 
                              
-                    $query = "UPDATE courses SET video_url = '$new_video_name', vidExt = '$vid_ext_lc' WHERE courseID = $courseID";
+                    $query = "UPDATE courses SET video_url = '$new_video_name', vidExt = '$vid_ext_lc' , picture_url = '$new_pic_name' WHERE courseID = $courseID";
                     mysqli_query($conn,$query);
                     header("Location: myCourse.php");
                 }else
@@ -1488,7 +1501,9 @@
                 <div class="form-group">
 
                     <label class="form-label" for="Video">Pick The Video File</label>
-                    <input   name="my_video" type="file" class="form-control" id="Video" />
+                    <input   name="my_video" type="file" class="form-control" id="Video" /> <br> <br>
+                    <label class="form-label" for="Video">Pick The Picture File</label>
+                    <input   name="my_picture" type="file" class="form-control" id="Picture" />
                     <small id="errorVideoExt"></small>
                 </div>
 
