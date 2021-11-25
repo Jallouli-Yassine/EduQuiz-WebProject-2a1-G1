@@ -2,7 +2,8 @@
     require_once"./../Controllers/postController.php";
     require_once"./../model/modelPost.php";
 
-        if( isset($_POST['Iduser']) 
+        if(isset($_POST["idpost"])  
+            && isset($_POST['Iduser'])
             && isset($_POST['nameuser']) 
             && isset($_POST['content']) 
             && isset($_POST['title']) 
@@ -10,7 +11,8 @@
             && isset($_POST['imageurl']) 
             ){
 
-        if( !empty($_POST['Iduser'])&&
+        if( !empty($_POST["idpost"]) &&
+            !empty($_POST['Iduser'])&&
             !empty($_POST['nameuser'])&&
             !empty($_POST['content'])&&
             !empty($_POST['title'])&&
@@ -20,6 +22,7 @@
             {
                 $postC = new PostC();
                 $post = new Post($_POST[''],
+                $_POST['idpost'],
                 $_POST['Iduser'],
                 $_POST['nameuser'],
                 $_POST['content'],

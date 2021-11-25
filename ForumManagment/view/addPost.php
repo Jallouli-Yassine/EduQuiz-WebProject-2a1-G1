@@ -322,6 +322,7 @@
             </div>
         </div>
     </section> 
+    <br><br>
 
     <!-- footer part start-->
     <footer class="footer-area">

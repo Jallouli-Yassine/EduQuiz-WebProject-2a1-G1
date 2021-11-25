@@ -68,27 +68,30 @@
 
 
         function modifierpost($post, $idpost){
+			$sql = "UPDATE post(Idpost,Iduser,nameuser,content,title,date,imageurl)
+            VALUES(:Idpost,:Iduser,:nameuser,:content,:title,:date,:imageurl)";
+			var_dump($post);
 			try {
 				$db = config::getConnexion();
 				$query = $db->prepare(
 					'UPDATE post SET 
+						iduser= :iduser,
+						nameuser= :nameuser,
+						content= :content,
 						title= :title, 
-						content= :content
+						date= :date,
 						imageurl= :imageurl
-						nameuser= :nameuser
-						date= :date
-						iduser= :iduser
 						
 					WHERE idpost= :idpost'
 				);
 				$query->execute([
-					'title' => $post->gettitle(),
-					'content' => $post->getcontent(),
-					'imageurl' => $post->getimageurl(),
+					'iduser' => $post->getIduser(),
 					'nameuser' => $post->getnameuser(),
+					'content' => $post->getcontent(),
+					'title' => $post->gettitle(),
 					'date' => $post->getdate(),
-					'Iduser' => $post->getIduser(),
-					'Idpost' => $idpost
+					'imageurl' => $post->getimageurl(),
+					'idpost' => $idpost
 				]);
 				echo $query->rowCount() . " records UPDATED successfully <br>";
 			} catch (PDOException $e) {

@@ -10,35 +10,41 @@
     // create an instance of the controller
     $postC = new postC();
     $id = (int) $_GET['idpost'];
+    // echo "id is null".$_GET['idpost'];
 
     if (
-        isset($_POST["Idpost"]) &&
+       /*  isset($_POST["Idpost"]) &&
         isset($_POST["Iduser"]) &&
-		isset($_POST["nameuser"]) &&		
+		isset($_POST["nameuser"]) &&	 */	
         isset($_POST["content"]) &&
-		isset($_POST["title"]) && 
-        isset($_POST["date"]) && 
-        isset($_POST["imageurl"])
+		isset($_POST["title"]) //&& 
+       /*  isset($_POST["date"]) && 
+        isset($_POST["imageurl"]) */
     ) {
         if (
-            !empty($_POST["idpost"]) && 
+           /*  !empty($_POST["idpost"]) && 
             !isset($_POST["iduser"]) &&
-			!empty($_POST['nameuser']) &&
+			!empty($_POST['nameuser']) && */
             !empty($_POST["content"]) && 
-			!empty($_POST["title"]) && 
-            !empty($_POST["date"]) && 
-            !empty($_POST["imageurl"])
+			!empty($_POST["title"]) //&& 
+           /*  !empty($_POST["date"]) && 
+            !empty($_POST["imageurl"]) */
         ) {
             $post = new post(
-                $_POST['idpost'],
-                $_POST['iduser'],
-				$_POST['nameuser'],
+                $_POST['id'], 
+                $_POST['iduser'], 
+			    $_POST['nameuser'], 
                 $_POST['content'], 
 				$_POST['title'],
-                $_POST['date'],
+                $_POST['date'], 
                 $_POST['imageurl']
             );
-            $postC->modifierpost($post, $_POST["idpost"]);
+
+
+            $postC->modifierpost($post, $_GET["idpost"]);
+            echo 'the iddddd'.$_GET["idpost"];
+            header("Location: post.php?id=".$_GET['idpost']);
+            
           
         }
         else
@@ -177,10 +183,13 @@
 		?>
        
             <div class="col-lg-8">
-                <form class="form-contact contact_form" action="post.php?id=<?php echo $post['idpost'] ?>" method="POST" id="contactForm" novalidate="novalidate">
+                <form class="form-contact contact_form" action="updateForum.php?idpost=<?php echo $_GET["idpost"] ?>" method="POST" id="contactForm" novalidate="novalidate">
                     <div class="row">
 
-                                    
+                    <input  value="50"  type="hidden" name="Idpost" id="Idpost" class="form-control" />
+                                    <input  value="50"  type="hidden" name="Iduser" id="Iduser" class="form-control" />
+                                    <input  value="2021-06-23"  type="hidden" name="date" id="date" class="form-control" />
+                                    <input  value="salma"  type="hidden" name="nameuser" id="nameuser" class="form-control" />
                         <!--div class="col-12">
                             <select style="margin-bottom :3%" class="form-select" name="Categorie" aria-label="Default select example">
                                 <option selected>Select Course Categori</option>
