@@ -3,6 +3,7 @@
     $courseC = new CourseC();
     $coursActivé=$courseC->getTrueCourses(1);
     $listeDesactivé=$courseC->getFalseCourses(0);
+    $listeDeclined=$courseC->getDeclinedCourses(-1);
 
 
 ?>
@@ -16,7 +17,7 @@
     <title>All Courses | Kiaalap - Kiaalap Admin Template</title>
     <meta name="description" content="">
 
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
 		============================================ -->
@@ -149,7 +150,8 @@
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="All Courses" href="all-courses.php"><span class="mini-sub-pro">All
                                             Courses</span></a></li>
-                                <li><a title="All Courses" href="myCourse.php"><span class="mini-sub-pro">My Courses</span></a></li>
+                                <li><a title="All Courses" href="myCourse.php"><span class="mini-sub-pro">My
+                                            Courses</span></a></li>
                                 <li><a title="Add Courses" href="add-course.php"><span class="mini-sub-pro">Add
                                             Course</span></a></li>
                                 <li><a title="Edit Courses" href="edit-course.html"><span class="mini-sub-pro">Edit
@@ -1402,7 +1404,8 @@
                 </div>
             </div>
         </div>
-        <div  style="height:100vh; width:95%;  background-color:white; padding:5% 5% 5% 5%" class="courses-area container-fluid">
+        <div style="height:100vh; width:95%;  background-color:white; padding:5% 5% 5% 5%"
+            class="courses-area container-fluid">
             <div class="container-fluid">
                 <div class="row">
 
@@ -1410,6 +1413,7 @@
                         <h2 style="text-align:center;">pending courses</h2>
                         <table style="border:0px solid grey;text-align:center" class="table">
                             <tr style="border-bottom: 0px solid grey;">
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">course PIC</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">courseID</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">ProfID</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">Title</th>
@@ -1417,39 +1421,73 @@
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">#</th>
 
                             </tr>
-                          
+
                             <?php foreach($listeDesactivé as $Fcourse) {?>
-                                <?php if( $Fcourse['video_url']!="") { ?>
+                            <?php if( $Fcourse['video_url']!="") { ?>
                             <tr>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                <td
+                                    style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                    <?php 
+                            
+                            $courseID=$Fcourse['courseID'];
+                            include "./../connect.php";
+                            $sql = "SELECT * FROM courses WHERE picture_url= $courseID.";
+                            $res = mysqli_query($conn, $sql);
+                            if (mysqli_num_rows($res) > 0) {
+                                while ($picture = mysqli_fetch_assoc($res)) { 
+                            ?>
+
+                                    <!--
+                                        oncontextmenu="return false;"
+                                    -->
+
+                                    <img  style="height:50px;border-radius:100%" src="uploads/coursesPictures/<?=$picture['picture_url']?>" alt="">
+
+
+                            <?php 
+                            }
+                            }else {
+                                echo "<h1>no picture yet</h1>";
+                            }
+                            ?>
+                                </td>
+                                <td
+                                    style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
                                     <?php echo $Fcourse['courseID'] ?>
                                 </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                <td
+                                    style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
                                     <?php echo $Fcourse['profID'] ?>
                                 </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                <td
+                                    style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
                                     <?php echo $Fcourse['title'] ?>
                                 </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                <div   style="padding:5px;width:100%;margin-bottom:0" class="alert alert-warning" role="alert">
-                                    pending
+                                <td
+                                    style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                    <div style="padding:5px;width:100%;margin-bottom:0" class="alert alert-warning"
+                                        role="alert">
+                                        pending
                                     </div>
                                 </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                <td
+                                    style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
                                     <form action="./updateStateCourse.php" method="POST">
-                                        <input style="float : left;margin-right:5%;margin-left:5%"
-                                            class="btn btn-info" type="submit" value="ACTIVATE COURSE">
+                                        <input style="float : left;margin-right:5%;margin-left:5%" class="btn btn-info"
+                                            type="submit" value="ACTIVATE COURSE">
                                         <input name="courseIDp" type="hidden"
                                             value="<?php echo $Fcourse['courseID'] ?>">
                                     </form>
-                                    <form action="./deleteCourse.php" method="post">
+                                    
+                                    
+                                    <form action="./decline-course.php" method="post">
                                         <input style="float : left;margin-right:5%;margin-left:5% margin-right:10px"
                                             class="btn btn-danger" type="submit" value="Decline">
                                         <input name="courseIDD" type="hidden"
                                             value="<?php echo $Fcourse['courseID'] ?>">
                                     </form>
 
-                                
+
                                 </td>
                             </tr>
                             <?php } ?>
@@ -1460,27 +1498,123 @@
                         <h2 style="text-align:center;">active courses</h2>
                         <table style="border:0px solid grey;text-align:center" class="table">
                             <tr style="border-bottom: 0px solid grey;">
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">course PIC</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">courseID</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">ProfID</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">Title</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">state</th>
-                  
+
                             </tr>
 
                             <?php foreach($coursActivé as $Tcourse) {?>
                             <tr>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                <td
+                                    style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                    <?php 
+                            
+                            $courseID=$Tcourse['courseID'];
+                            include "./../connect.php";
+                            $sql = "SELECT * FROM courses WHERE picture_url= $courseID.";
+                            $res = mysqli_query($conn, $sql);
+                            if (mysqli_num_rows($res) > 0) {
+                                while ($picture = mysqli_fetch_assoc($res)) { 
+                            ?>
+
+                                    <!--
+                                        oncontextmenu="return false;"
+                                    -->
+
+                                    <img  style="height:50px;border-radius:100%" src="uploads/coursesPictures/<?=$picture['picture_url']?>" alt="">
+
+
+                            <?php 
+                            }
+                            }else {
+                                echo "<h1>no picture yet</h1>";
+                            }
+                            ?>
+                                </td>
+                                <td
+                                    style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
                                     <?php echo $Tcourse['courseID'] ?>
                                 </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                <td
+                                    style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
                                     <?php echo $Tcourse['profID'] ?>
                                 </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                <td
+                                    style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
                                     <?php echo $Tcourse['title'] ?>
                                 </td>
-                                <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                <div   style="padding:5px;width:100%;margin-bottom:0" class="alert alert-success" role="alert">
-                                    accepted
+                                <td
+                                    style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                    <div style="padding:5px;width:100%;margin-bottom:0" class="alert alert-success"
+                                        role="alert">
+                                        accepted
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <?php } ?>
+                        </table>
+                    </div>
+                    <div class="col-lg-12">
+                        <h2 style="text-align:center;">declined courses</h2>
+                        <table style="border:0px solid grey;text-align:center" class="table">
+                            <tr style="border-bottom: 0px solid grey;">
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">course PIC</th>
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">courseID</th>
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">ProfID</th>
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">Title</th>
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center">state</th>
+
+                            </tr>
+
+                            <?php foreach($listeDeclined as $Dcourse) {?>
+                            <tr>
+                                <td
+                                    style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                    <?php 
+                            
+                            $courseID=$Dcourse['courseID'];
+                            include "./../connect.php";
+                            $sql = "SELECT * FROM courses WHERE picture_url= $courseID.";
+                            $res = mysqli_query($conn, $sql);
+                            if (mysqli_num_rows($res) > 0) {
+                                while ($picture = mysqli_fetch_assoc($res)) { 
+                            ?>
+
+                                    <!--
+                                        oncontextmenu="return false;"
+                                    -->
+
+                                    <img  style="height:50px;border-radius:100%" src="uploads/coursesPictures/<?=$picture['picture_url']?>" alt="">
+
+
+                            <?php 
+                            }
+                            }else {
+                                echo "<h1>no picture yet</h1>";
+                            }
+                            ?>
+                                </td>
+                                <td
+                                    style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                    <?php echo $Dcourse['courseID'] ?>
+                                </td>
+                                <td
+                                    style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                    <?php echo $Dcourse['profID'] ?>
+                                </td>
+                                <td
+                                    style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                    <?php echo $Dcourse['title'] ?>
+                                </td>
+                                <td
+                                    style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                    <div style="padding:5px;width:100%;margin-bottom:0" class="alert alert-danger"
+                                        role="alert">
+                                        declined
                                     </div>
                                 </td>
 

@@ -121,7 +121,31 @@
             <div class="row">
                 <div class="col-lg-8 course_details_left">
                     <div class="main_image">
-                        <img class="img-fluid" src="./../../img/single_cource.png" alt="">
+                    <?php 
+                            
+                            $courseID=$_POST['courseID'];
+                            include "./../connect.php";
+                            $sql = "SELECT * FROM courses WHERE picture_url= $courseID.";
+                            $res = mysqli_query($conn, $sql);
+
+                            if (mysqli_num_rows($res) > 0) {
+                                while ($picture = mysqli_fetch_assoc($res)) { 
+                            ?>
+
+                                    <!--
+                                        oncontextmenu="return false;"
+                                    -->
+
+                                    <img class="img-fluid" style="width:500px" src="uploads/coursesPictures/<?=$picture['picture_url']?>" alt="">
+
+
+                            <?php 
+                            }
+                            }else {
+                                echo "<h1>Empty</h1>";
+                            }
+                            ?>
+                       
                     </div>
                     <div class="content_wrapper">
                         <h4 class="title_top">Details</h4>
@@ -159,7 +183,7 @@
                                         oncontextmenu="return false;"
                                     -->
 
-                            <video controls  style="width: 100%;" src="uploads/<?=$video['video_url']?>"> </video>
+                            <video controls  style="width: 100%;" src="uploads/coursesVideos/<?=$video['video_url']?>"> </video>
 
 
                             <?php 

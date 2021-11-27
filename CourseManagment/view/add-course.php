@@ -7,8 +7,6 @@
             && isset($_POST['Title']) 
             && isset($_POST['Price']) 
             && isset($_POST['Description']) 
-
-            && isset($_POST['imageUrl']) 
             ){
 
                 
@@ -16,9 +14,7 @@
             !empty($_POST['Categorie'])&&
             !empty($_POST['Title'])&&
             !empty($_POST['Price'])&&
-            !empty($_POST['Description'])&&
-
-            !empty($_POST['imageUrl'])
+            !empty($_POST['Description'])
             )
             {
 
@@ -64,7 +60,7 @@
                     $_POST['Price'],
                     $_POST['Description'],
                     "",
-                    $_POST['imageUrl'],
+                    "",
                     0
             );
 
@@ -1595,8 +1591,8 @@
                                             
                                                                     </div>
                                                             -->
-
-
+                
+<!-- 
                                                                     <div class="col-lg-12">
                                                                         <div class="form-group">
 
@@ -1608,6 +1604,8 @@
                                                                         </div>
 
                                                                     </div>
+-->
+
 
                                                                 </div>
                                                                 <div class="form-group mt-3">

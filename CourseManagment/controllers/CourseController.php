@@ -64,6 +64,18 @@
 			}
         }
 
+        function getDeclinedCourses($declined){
+            $sql="SELECT * FROM courses WHERE etat=$declined";
+			$db = config::getConnexion();
+			try{
+                $liste = $db->query($sql);
+                return $liste;
+			}
+			catch (Exception $e){
+				echo $e->getMessage();
+			}
+        }
+
         function activeStateCourse($courseID){
             $db = config::getConnexion();
             $query = $db->prepare("UPDATE courses SET etat= 1 WHERE courseID= :courseID");
@@ -142,6 +154,13 @@
 			}
         }
         
+        function declineState($courseID){
+            $db = config::getConnexion();
+            $query = $db->prepare("UPDATE courses SET etat= -1 WHERE courseID= :courseID");
+            $query->execute(['courseID' => $courseID]);
+            echo $query->rowCount() . " records UPDATED successfully <br>";
+        }
+
     }
     
 ?>

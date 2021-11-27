@@ -1391,6 +1391,7 @@
                         <h2 style="text-align:center;padding:0 0 2% 0">MY COURSES</h2>
                         <table  style="border:0px solid grey;text-align:center" class="table">
                             <tr style="border-bottom: 0px solid grey;">
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >course PIC</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >courseID</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >ProfID</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >Title</th>
@@ -1402,6 +1403,31 @@
                                
 
                             <tr>
+                                <td   style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                <?php 
+                            
+                            $courseID=$course['courseID'];
+                            include "./../connect.php";
+                            $sql = "SELECT * FROM courses WHERE picture_url= $courseID.";
+                            $res = mysqli_query($conn, $sql);
+                            if (mysqli_num_rows($res) > 0) {
+                                while ($picture = mysqli_fetch_assoc($res)) { 
+                            ?>
+
+                                    <!--
+                                        oncontextmenu="return false;"
+                                    -->
+
+                                    <img  style="height:50px;border-radius:100%" src="uploads/coursesPictures/<?=$picture['picture_url']?>" alt="">
+
+
+                            <?php 
+                            }
+                            }else {
+                                echo "<h1>no picture yet</h1>";
+                            }
+                            ?>
+                                </td>
                                 <td   style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
                                     <?php echo $course["courseID"] ?>
                                 </td>
@@ -1423,7 +1449,7 @@
                                     </div>
                                         <?php }else{ ?>
                                             <div   style="padding:5px;width:100%;margin-bottom:0" class="alert alert-danger" role="alert">
-                                    must upload video
+                                    declined
                                     </div>
                                             <?php } ?>
                                 </td>
