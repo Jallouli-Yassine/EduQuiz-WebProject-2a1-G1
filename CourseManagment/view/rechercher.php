@@ -1,10 +1,10 @@
-<?php 
+<?php
     require_once "./../controllers/CourseController.php";
     $courseC = new CourseC();
-    $listeCourse=$courseC->getTrueCourses(1);
+    $listeCourseCherche=$courseC->rechercher($_GET['search']);
 
-    //$listeCourse=$courseC->afficherCourses();
 ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -150,7 +150,7 @@
             <!-- END NEW -->
 
             <div style="height:200vh;" class="row">
-                <?php foreach ($listeCourse as $course) {   ?>
+                <?php foreach ($listeCourseCherche as $course) {   ?>
                 <div style="height:100px" class="col-lg-4 course <?php echo $course['categorie']?>">
                     <div style="margin-bottom: 5%; height: 650px !important;" class="single_special_cource">
                         <?php 
@@ -198,9 +198,6 @@
                                     </h4>
                                 </div>
                             </div>
-
-
-
 
                             <a href="./../../course-details.php">
                                 <h3>
@@ -434,7 +431,7 @@
 
     <!-- jquery plugins here-->
     <!-- jquery -->
-    <script src="./../../js/filtreCourse.js"></script>
+     <script src="./../../js/filtreCourse.js"></script>                       
     <script src="./../../js/jquery-1.12.1.min.js"></script>
     <!-- popper js -->
     <script src="./../../js/popper.min.js"></script>

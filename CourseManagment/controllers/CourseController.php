@@ -52,18 +52,6 @@
 			}
         }
 
-        function getFalseCourses($false) {
-			$sql="SELECT * FROM courses WHERE etat=$false";
-			$db = config::getConnexion();
-			try{
-                $liste = $db->query($sql);
-                return $liste;
-			}
-			catch (Exception $e){
-				echo $e->getMessage();
-			}
-        }
-
         function getDeclinedCourses($declined){
             $sql="SELECT * FROM courses WHERE etat=$declined";
 			$db = config::getConnexion();
@@ -159,6 +147,28 @@
             $query = $db->prepare("UPDATE courses SET etat= -1 WHERE courseID= :courseID");
             $query->execute(['courseID' => $courseID]);
             echo $query->rowCount() . " records UPDATED successfully <br>";
+        }
+
+        function getFalseCourses($false) {
+			$sql="SELECT * FROM courses WHERE etat=$false";
+			$db = config::getConnexion();
+			try{
+                $liste = $db->query($sql);
+                return $liste;
+			}
+			catch (Exception $e){
+				echo $e->getMessage();
+			}
+        }
+
+        function rechercher($value){
+            $db = config::getConnexion();
+            $SEARCH=$db->prepare("SELECT * FROM courses WHERE title LIKE :value ");
+            $value="%".$value."%";
+            $SEARCH->bindParam("value",$value);
+            $SEARCH->execute();
+            return $SEARCH;
+
         }
 
     }
