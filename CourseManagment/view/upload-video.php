@@ -132,6 +132,7 @@
     <link rel="stylesheet" href="./../../EDu-Quiz B/style.css">
     <!-- responsive CSS
 		============================================ -->
+    <link rel="stylesheet" href="./../../css/addCourse.css">
     <link rel="stylesheet" href="./../../EDu-Quiz B/css/responsive.css">
     <!-- modernizr JS
 		============================================ -->
@@ -1501,10 +1502,15 @@
                 <div class="form-group">
 
                     <label class="form-label" for="Video">Pick The Video File</label>
-                    <input   name="my_video" type="file" class="form-control" id="Video" /> <br> <br>
+                    <input   name="my_video" type="file" class="form-control" id="Video" />
+                    <small id="errorVideoExt"></small>
+                    
+                    <br> <br>
+                    
                     <label class="form-label" for="Video">Pick The Picture File</label>
                     <input   name="my_picture" type="file" class="form-control" id="Picture" />
-                    <small id="errorVideoExt"></small>
+
+                    <small id="errorImageExt"></small>
                 </div>
 
     
@@ -1611,6 +1617,7 @@
 
     <!-- jquery
 		============================================ -->
+    <script src="./../../js/uploadVidPic.js"></script>
     <script src="./../../EDu-Quiz B/js/vendor/jquery-1.12.4.min.js"></script>
     <!-- bootstrap JS
 		============================================ -->

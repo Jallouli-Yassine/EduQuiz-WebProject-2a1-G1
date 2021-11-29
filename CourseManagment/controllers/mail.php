@@ -35,7 +35,7 @@ $mail = new PHPMailer();
     $mail->setFrom('jungloul1@gmail.com', 'BIG J1');
     $mail->addAddress('yassine.jallouli@esprit.tn');   
 
-    $mail->Subject = 'test title email';
+    $mail->Subject = 'EDUQUIZ COURSE MANAGMENT';
     $mail->Body    = $_POST['Description'];
     $mail->send();
 

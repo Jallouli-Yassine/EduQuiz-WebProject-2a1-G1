@@ -1501,7 +1501,7 @@
 
                                                                     <div class="col-12">
                                                                         <select style="margin-bottom :3%"
-                                                                            class="form-select" name="Categorie"
+                                                                            class="form-select" id="Categorie" name="Categorie"
                                                                             aria-label="Default select example">
                                                                             <option selected>Select Course Categori
                                                                             </option>
@@ -1511,7 +1511,7 @@
                                                                             </option>
                                                                             <option value="design">design</option>
                                                                             <option value="math">math</option>
-
+                                                                            
                                                                         </select>
                                                                         <!--
                                             
@@ -1529,7 +1529,7 @@
                                                                     -->
 
 
-                                                                        <small id="errorCategories"></small>
+                                                                    <small id="errorCategories"></small>
 
                                                                     </div>
 
@@ -1705,8 +1705,8 @@
     </div>
         
         
-    <script src="./../../js/add-course.js"></script>
 
+        <script src="./../../js/add-course.js"></script>
     <!-- jquery
 		============================================ -->
     <script src="./../../EDu-Quiz B/js/vendor/jquery-1.12.4.min.js"></script>
