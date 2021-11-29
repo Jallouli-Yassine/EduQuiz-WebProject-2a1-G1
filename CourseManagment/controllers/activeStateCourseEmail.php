@@ -1,10 +1,7 @@
 <?php
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
-require_once"./CourseController.php";
-$courseC = new CourseC();
-echo $_POST['courseIDD'];
-$courseC->declineState($_POST['courseIDD']);
+
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -36,7 +33,7 @@ $mail = new PHPMailer();
     $mail->addAddress('yassine.jallouli@esprit.tn');   
 
     $mail->Subject = 'EDUQUIZ COURSE MANAGMENT';
-    $mail->Body    = "<h1>".$_POST['Description']."</h1>"."<br> <a style='color:orange;font-size:25px' href='http://localhost/php%20projects/esprit/EduQuiz-WebProject-2a1-G1/CourseManagment/view/myCourse.php'> my courses page </a>";
+    $mail->Body    = "<h1 style='color:black;'>your course was activated successfuly :D </h1> <br> <a style='color:orange;font-size:25px' href='http://localhost/php%20projects/esprit/EduQuiz-WebProject-2a1-G1/CourseManagment/view/myCourse.php'> my courses page </a>";
     $mail->send();
 
 

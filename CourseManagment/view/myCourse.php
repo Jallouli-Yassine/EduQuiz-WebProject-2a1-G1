@@ -334,7 +334,7 @@
             </div>
         </div>
         <div class="header-advance-area">
-            <div class="header-top-area">
+            <div style="background-color:black !important" class="header-top-area">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -1461,7 +1461,7 @@
                                     </form>
                                     <?php if($course['video_url']=="") { ?>
                                     <form  action="./upload-video.php" method="POST">
-                                        <input style="float : right;margin-right:70px;" class="btn btn-danger" type="submit" value="must upload video">
+                                        <input style="float : right;margin-right:70px;" class="btn btn-danger" type="submit" value="must upload files">
                                         <input type="hidden" name="courseID" value="<?=$course['courseID']?>">
                                     </form>
                                     <?php } ?>

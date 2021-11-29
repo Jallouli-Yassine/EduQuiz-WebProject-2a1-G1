@@ -1504,12 +1504,7 @@
                                                                     <input value="8" type="hidden" name="profID"
                                                                         id="profID" class="form-control" />
 
-
-
-                                                                        <small id="errorCategories"></small>
-
                                                                     </div>
-
 
                                                                     <div class="col-lg-12">
                                                                         <div class="form-group">
@@ -1526,42 +1521,12 @@
                                                                         </div>
                                                                     </div>
 
-                                                                    <!--
-                                                                    <div class="col-6">
-                                                                        <div class="form-group">
-                                            
-                                                                            <label class="form-label" for="Video">Pick The Video File</label>
-                                                                            <input name="videoUrl" type="file" class="form-control" id="Video" />
-                                                                          <small id="errorVideoExt"></small>  
-                                                                        </div>
-                                            
-                                                                    </div>
-                                                            -->
-                
-<!-- 
-                                                                    <div class="col-lg-12">
-                                                                        <div class="form-group">
-
-                                                                            <label class="form-label" for="Image">Pick
-                                                                                The Image Of The Video</label>
-                                                                            <input name="imageUrl" type="file"
-                                                                                class="form-control" id="Image" />
-                                                                            <small id="errorImageExt"></small>
-                                                                        </div>
-
-                                                                    </div>
--->
-
 
                                                                 </div>
                                                                 <div class="form-group mt-3">
                                                                
-                                                                    <input 
-                                                                        class="btn btn-danger" type="submit" value="Decline">
-                                                                    <input name="courseIDD" type="hidden"
-                                                                        value="<?php echo $course['courseID'] ?>">
-                                                                    <input name="courseIDD" type="hidden"
-                                                                        value="<?php echo $course['courseID'] ?>">
+                                                                    <input class="btn btn-danger" type="submit" value="Decline">
+                                                                    <input name="courseIDD" type="hidden"value="<?php echo $course['courseID'] ?>">
                                                                
                                                                 <?php
                                                                     }
@@ -1660,7 +1625,7 @@
     </div>
         
         
-    <script src="./../../js/add-course.js"></script>
+    <script src="./../../js/sendEmail.js"></script>
 
     <!-- jquery
 		============================================ -->

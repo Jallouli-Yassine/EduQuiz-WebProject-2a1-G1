@@ -79,19 +79,20 @@
     <title>Add Course | Kiaalap - Kiaalap Admin Template</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <!-- favicon
 		============================================ -->
-        <link rel="stylesheet" href="./../../css/addCourse.css">
+    <link rel="stylesheet" href="./../../css/addCourse.css">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
     <!-- Bootstrap CSS
 		============================================ -->
-   <!--
+    <!--
        
-   --> <link rel="stylesheet" href="./../../EDu-Quiz B/css/bootstrap.min.css">
+   -->
+    <link rel="stylesheet" href="./../../EDu-Quiz B/css/bootstrap.min.css">
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="./../../EDu-Quiz B/css/font-awesome.min.css">
@@ -220,7 +221,8 @@
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="All Courses" href="all-courses.php"><span class="mini-sub-pro">All
                                             Courses</span></a></li>
-                                <li><a title="All Courses" href="myCourse.php"><span class="mini-sub-pro">My Courses</span></a></li>
+                                <li><a title="All Courses" href="myCourse.php"><span class="mini-sub-pro">My
+                                            Courses</span></a></li>
                                 <li><a title="Add Courses" href="add-course.php"><span class="mini-sub-pro">Add
                                             Course</span></a></li>
                                 <li><a title="Edit Courses" href="edit-course.html"><span class="mini-sub-pro">Edit
@@ -399,7 +401,7 @@
             </div>
         </div>
         <div class="header-advance-area">
-            <div class="header-top-area">
+            <div style="background-color:black !important" class="header-top-area">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -1291,7 +1293,8 @@
                                         <li><a data-toggle="collapse" data-target="#democrou" href="#">Courses <span
                                                     class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul id="democrou" class="collapse dropdown-header-top">
-                                                <li><a href="all-courses.html">All Courses</a>
+                                                <li>
+                                                    <a href="./all-courses.php">All Courses</a>
                                                 </li>
                                                 <li><a href="add-course.php">Add Course</a>
                                                 </li>
@@ -1442,35 +1445,7 @@
                 </div>
             </div>
             <!-- Mobile Menu end -->
-            <div class="breadcome-area">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="breadcome-list single-page-breadcome">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="breadcome-heading">
-                                            <form role="search" class="sr-input-func">
-                                                <input type="text" placeholder="Search..."
-                                                    class="search-int form-control">
-                                                <a href="#"><i class="fa fa-search"></i></a>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <ul class="breadcome-menu">
-                                            <li><a href="#">Home</a> <span class="bread-slash">/</span>
-                                            </li>
-                                            <li><span class="bread-blod">Add Courses</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
         <!-- Single pro tab review Start-->
         <div class="single-pro-review-area mt-t-30 mg-b-15">
@@ -1478,11 +1453,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-payment-inner-st">
-                            <ul id="myTabedu1" class="tab-review-design">
-                                <li class="active"><a href="#description">Courses Details</a></li>
-                                <li><a href="#reviews"> Acount Information</a></li>
-                                <li><a href="#INFORMATION">Social Information</a></li>
-                            </ul>
+
                             <div id="myTabContent" class="tab-content custom-product-edit">
                                 <div class="product-tab-list tab-pane fade active in" id="description">
                                     <div class="row">
@@ -1499,9 +1470,10 @@
                                                                     <input value="8" type="hidden" name="profID"
                                                                         id="profID" class="form-control" />
 
-                                                                    <div class="col-12">
+                                                                    <div style="margin-top:100px" class="col-lg-12">
                                                                         <select style="margin-bottom :3%"
-                                                                            class="form-select" id="Categorie" name="Categorie"
+                                                                            class="form-select" id="Categorie"
+                                                                            name="Categorie"
                                                                             aria-label="Default select example">
                                                                             <option selected>Select Course Categori
                                                                             </option>
@@ -1511,7 +1483,7 @@
                                                                             </option>
                                                                             <option value="design">design</option>
                                                                             <option value="math">math</option>
-                                                                            
+
                                                                         </select>
                                                                         <!--
                                             
@@ -1529,7 +1501,7 @@
                                                                     -->
 
 
-                                                                    <small id="errorCategories"></small>
+                                                                        <small id="errorCategories"></small>
 
                                                                     </div>
 
@@ -1591,8 +1563,8 @@
                                             
                                                                     </div>
                                                             -->
-                
-<!-- 
+
+                                                                    <!-- 
                                                                     <div class="col-lg-12">
                                                                         <div class="form-group">
 
@@ -1609,8 +1581,8 @@
 
                                                                 </div>
                                                                 <div class="form-group mt-3">
-                                                                    <input type="submit"
-                                                                        class="btn btn-success" value="add course">
+                                                                    <input type="submit" class="btn btn-success"
+                                                                        value="add course">
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -1690,6 +1662,7 @@
                 </div>
             </div>
         </div>
+        <br><br><br><br><br><br><br><br>
         <div class="footer-copyright-area">
             <div class="container-fluid">
                 <div class="row">
@@ -1703,10 +1676,10 @@
             </div>
         </div>
     </div>
-        
-        
 
-        <script src="./../../js/add-course.js"></script>
+
+
+    <script src="./../../js/add-course.js"></script>
     <!-- jquery
 		============================================ -->
     <script src="./../../EDu-Quiz B/js/vendor/jquery-1.12.4.min.js"></script>

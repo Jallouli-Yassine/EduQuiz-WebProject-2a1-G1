@@ -163,7 +163,7 @@
 
         function rechercher($value){
             $db = config::getConnexion();
-            $SEARCH=$db->prepare("SELECT * FROM courses WHERE title LIKE :value ");
+            $SEARCH=$db->prepare("SELECT * FROM courses WHERE title LIKE :value and etat=1");
             $value="%".$value."%";
             $SEARCH->bindParam("value",$value);
             $SEARCH->execute();

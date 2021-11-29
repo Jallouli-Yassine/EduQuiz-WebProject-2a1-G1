@@ -1,5 +1,7 @@
  <?php 
       require_once "./../controllers/CourseController.php";
+
+
   if(isset($_POST['courseIDp']))
   {
       /*
@@ -11,6 +13,7 @@
     
     $courseC = new CourseC();
     $courseC->activeStateCourse($_POST['courseIDp']);
+    require_once "./../controllers/activeStateCourseEmail.php";
     header("Location:./all-courses.php");
   }
 
