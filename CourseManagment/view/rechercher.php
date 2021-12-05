@@ -165,7 +165,7 @@
 
                         <!--
                                         oncontextmenu="return false;"
-                                    -->
+                        -->
 
                         <img style="height:70%" src="uploads/coursesPictures/<?=$picture['picture_url']?>" alt="">
 

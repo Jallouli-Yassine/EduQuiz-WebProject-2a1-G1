@@ -97,9 +97,15 @@
 			try {
 				$db = config::getConnexion();
 				$query = $db->prepare(
+                    
 				'UPDATE courses SET
-				title= :title, price= :price, Descrip= :Descrip, video_url= :video_url, picture_url= :picture_url
+				title= :title,
+                price= :price,
+                Descrip= :Descrip,
+                video_url= :video_url,
+                picture_url= :picture_url
 				WHERE courseID= :courseID');
+
 				$query->execute([
 					'title' => $course->getTitle(),
 					'price' => $course->getPrice(),
@@ -168,8 +174,79 @@
             $SEARCH->bindParam("value",$value);
             $SEARCH->execute();
             return $SEARCH;
+        }
+
+        function ajouterFav($idCourse,$idUser){
+            $sql = "INSERT INTO course_fav(course_id,user_id)
+            VALUES(:course_id,:user_id)";
+
+            $db = config::getConnexion();
+            try {
+                
+                $query = $db->prepare($sql);
+                
+                $query->execute([
+                    'course_id' => $idCourse,
+                    'user_id' => $idUser
+                ]);
+
+            } catch(Exception $e){
+				$e->getMessage();
+			}
+        }
+
+        function afficherFavCourses($idUser) {
+            $db = config::getConnexion();
+            $sql=$db->prepare("SELECT course_id FROM course_fav WHERE user_id=$idUser");
+           
+            try {
+                $sql->execute();
+                return $sql;
+            } catch(Exception $e){
+				$e->getMessage();
+			}
+        }
+
+        function verifCourseAdedToFavoriteTable($idCourse,$idUser){
+            $sql = "SELECT * FROM course_fav WHERE course_id='$idCourse' and user_id='$idUser'";
+            $db = config::getConnexion();
+            try {
+				$query=$db->prepare($sql);
+				$query->execute();
+
+				$course=$query->fetch();
+				return $course;
+            } catch(Exception $e){
+				$e->getMessage();
+			}
 
         }
+
+        
+        function deleteFromFav($idCourse,$idUser){
+            $db = config::getConnexion();
+            $sql = "DELETE FROM course_fav WHERE course_id='$idCourse' and user_id='$idUser'";
+            try {
+                $query = $db->prepare($sql);
+                $query->execute();
+            }catch(Exception $e){
+				$e->getMessage();
+			}
+        }
+
+
+/*
+        function afficherFavCourses2($courseID) {
+            $sql = "SELECT * FROM courses WHERE courseID=$courseID";
+            $db = config::getConnexion();
+            try {
+                $liste = $db->query($sql);
+                return $liste;
+            } catch(Exception $e){
+				$e->getMessage();
+			}
+        }
+*/
 
     }
     

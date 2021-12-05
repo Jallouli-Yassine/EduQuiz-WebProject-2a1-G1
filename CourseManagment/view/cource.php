@@ -3,6 +3,7 @@
     $courseC = new CourseC();
     $listeCourse=$courseC->getTrueCourses(1);
 
+
     //$listeCourse=$courseC->afficherCourses();
 ?>
 <!doctype html>
@@ -200,17 +201,38 @@
                             </div>
 
 
-
-
                             <a href="./../../course-details.php">
                                 <h3>
                                     <?php echo $course['title'] ?>
                                 </h3>
                             </a>
+                            
                             <p>
+                                
                                 <?php echo $course['Descrip'] ?>
 
                             </p>
+                            <?php 
+                                $courseVerif=$courseC->verifCourseAdedToFavoriteTable($course['courseID'],5) ;
+                               
+                                if($courseVerif==NULL){ ?>
+                            <form action="./addCourseToFav.php" method="post">
+                            <input type="hidden" value="<?php echo $course['courseID'] ?>" name="courseID" id="">
+                                <button style="margin-left:77%" class="btn btn-light">
+                                     <ion-icon  size="large" name="heart-outline"></ion-icon>
+                                </button>
+                            </form>
+                          
+                            <?php }else{ ?>
+                                <form action="./removeCourseFromFav.php" method="post">
+                                   <input type="hidden" value="<?php echo $course['courseID'] ?>" name="courseID" id="">
+                                <button style="margin-left:77%" class="btn btn-danger">
+                                     <ion-icon  size="large" name="heart-dislike-outline"></ion-icon>
+                                </button>
+                            </form>
+                          
+                                <?php } ?>
+
                             <div class="author_info">
                                 <div class="author_img">
                                     <img src="./../../img/author/author_1.png" alt="">
@@ -434,6 +456,8 @@
 
     <!-- jquery plugins here-->
     <!-- jquery -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="./../../js/filtreCourse.js"></script>
     <script src="./../../js/jquery-1.12.1.min.js"></script>
     <!-- popper js -->
