@@ -1,8 +1,14 @@
 <?php include '../Controllers/postController.php';
     require_once"./../Controllers/postController.php";
     require_once"./../model/modelPost.php";
+    include_once '../Controllers/commentController.php';
+    include_once '../Model/modelComment.php';
+    require_once"./../controllers/commentController.php";
+ 
+  
+  
 
-        if(isset($_POST["idpost"])  
+        if(isset($_POST["Iduser"])  
             && isset($_POST['Iduser'])
             && isset($_POST['nameuser']) 
             && isset($_POST['content']) 
@@ -39,11 +45,59 @@
         }
       
 $postC=new PostC();
-$listepost=$postC->afficherpost(); 
+$listepost=$postC->afficherpost();
+
 
 $postC=new PostC();
 $id = (int) $_GET['id'];
 $listepostbyid=$postC->afficherpostById($id); 
+
+
+if( isset($_POST['Iduser']) 
+&& isset($_POST['nameuser']) 
+&& isset($_POST['content']) 
+&& isset($_POST['date']) 
+&& isset($_POST['Idpost']) 
+){
+
+if( !empty($_POST['Iduser'])&&
+!empty($_POST['nameuser'])&&
+!empty($_POST['content'])&&
+!empty($_POST['date'])&&
+!empty($_POST['Idpost'])
+)
+{
+    $commentC = new CommentC();
+    $comment = new Comment($_POST[''],
+    $_POST['Iduser'],
+    $_POST['nameuser'],
+    $_POST['content'],
+    $_POST['date'],
+    $_POST['Idpost'],
+    0
+);
+
+    $commentC->ajouterComment($comment);
+
+    header("Location:./test.php");
+}
+}
+
+
+function redirect($url) {
+ob_start();
+header('Location: '.$url);
+ob_end_flush();
+die();
+}
+$commentC=new CommentC();
+$listecomment=$commentC->affichercomment(); 
+
+
+   
+
+
+
 
 
 
@@ -294,17 +348,34 @@ $listepostbyid=$postC->afficherpostById($id);
                             <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="form-outline">
-                                <textarea class="form-control" name="comment" id="comment" type="text"
+                                <form class="form-contact contact_form" method="POST" action="" id="commentForm" novalidate="novalidate" >
+                                <input  value="2"  type="hidden" name="Idcomment" id="Idcomment" class="form-control" />
+
+                                    <input  value="50"  type="hidden" name="Iduser" id="Iduser" class="form-control" />
+                                    <input  value="2021-06-23"  type="hidden" name="date" id="date" class="form-control" />
+                                    <input  value="mayssa"  type="hidden" name="nameuser" id="nameuser" class="form-control" />
+                                    <input  value="30" type="hidden" name="idpost" id="idpost" class="form-control" />
+                                    
+
+                                    
+
+
+                           <!--         
+                                    <input class="form-control" name="content" id="content" type="text"
                                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter The Comment'"
-                                        placeholder='Enter The Comment' rows="3"></textarea>
-
-                                       
-
-                                    <label class="form-label" for="comment">Enter your comment</label>
-                                   
-                                </div>
-                                <small id="errorTitle"></small>
-                                <br>  <a href="course-details.html" class="btn_4">Comment</a>
+                                        placeholder='Enter The Comment' />
+                                    <label class="form-label" for="content">Enter your comment</label>
+                                    <small id="errorTitle"></small>
+        -->
+                                    
+                                    </div>
+                               
+                                </form> 
+                                <div class="form-group mt-3">
+                                    <form method="POST" action="test.php?id=<?php echo $post['idpost'] ?>">
+                                    <br>  <button type="submit" class="add_course button button-contactForm btn_1">Comment</button>
+                                    </form>
+                            </div>
                             </div>
                            
                            

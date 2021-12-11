@@ -5,8 +5,8 @@
     class CommentC{
 
         function ajouterComment($comment){
-            $sql = "INSERT INTO $comment(Idcomment,Iduser,nameuser,content,date,Idc$comment)
-            VALUES(:Idcomment,:Iduser,:nameuser,:content,:date,:Idc$comment)";
+            $sql = "INSERT INTO comment(Idcomment,Iduser,nameuser,content,date,Idpost)
+            VALUES(:Idcomment,:Iduser,:nameuser,:content,:date,:Idpost)";
 
             $db = config::getConnexion();
             try {
@@ -19,7 +19,7 @@
                     'nameuser' => $comment->getnameuser(),
                     'content' => $comment->getcontent(),
                     'date' => $comment->getdate(),
-                    'Idpost' => $comment->getIdcomment(),
+                    'Idpost' => $comment->getIdpost(),
                 ]);
 
             } catch(Exception $e){

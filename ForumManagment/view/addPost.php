@@ -32,7 +32,7 @@
 
                 $postC->ajouterPost($post);
 
-                header("Location:./forum.php");
+                header("Location:./addPost.php");
             }
         }
       

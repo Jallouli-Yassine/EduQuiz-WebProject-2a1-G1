@@ -1,34 +1,26 @@
 <?php
 include '../Controllers/commentController.php';
-    require_once"../Controllers/commentController.php";
-    require_once"../model/modelComment.php";
-    
+require_once"./../Controllers/commentController.php";
+require_once"./../model/modelComment.php";
 
-   
-    $error = "";
-
-    // create adherent
-    $comment = null;
-
-    // create an instance of the controller
-    $commentC = new commentC();
     if (
-        isset($_POST["idcomment"]) &&
-		isset($_POST["iduser"]) &&		
-        isset($_POST["nameuser"]) &&
-		isset($_POST["content"]) && 
-        isset($_POST["date"]) && 
-        isset($_POST["idpost"])
+        isset($_POST['idcomment']) &&
+		isset($_POST['iduser']) &&		
+        isset($_POST['nameuser']) &&
+		isset($_POST['content']) && 
+        isset($_POST['date']) && 
+        isset($_POST['idpost'])
     ) {
         if (
-            !empty($_POST["idcomment"]) && 
+            !empty($_POST['idcomment']) && 
 			!empty($_POST['iduser']) &&
-            !empty($_POST["nameuser"]) && 
-			!empty($_POST["content"]) && 
-            !empty($_POST["date"]) && 
-            !empty($_POST["idpost"])
+            !empty($_POST['nameuser']) && 
+			!empty($_POST['content']) && 
+            !empty($_POST['date']) && 
+            !empty($_POST['idpost'])
         ) {
-            $comment = new comment(
+            $commentC = new commentC();
+                $comment = new comment($_POST[''],
                 $_POST['idcomment'],
 				$_POST['iduser'],
                 $_POST['nameuser'], 
@@ -39,8 +31,7 @@ include '../Controllers/commentController.php';
             $commentC->ajoutercomment($comment);
             header('Location:addPost.php');
         }
-        else
-            $error = "Missing information";
+       
     }
 
     
@@ -80,7 +71,7 @@ include '../Controllers/commentController.php';
 
 
 
-    <section class="special_cource padding_top">
+   <!-- <section class="special_cource padding_top">
         <center>
             <div class="col-lg-8">
                 <form class="form-contact contact_form" action="" method="POST" id="contactForm" novalidate="novalidate">
@@ -114,8 +105,43 @@ include '../Controllers/commentController.php';
             </div>
         </center>
 
-    </section>
+    </section> -->
 
+    <section class="special_cource padding_top">
+        <center>
+            <div class="col-lg-8">
+                <form class="form-contact contact_form" action="" method="POST" id="contactForm" novalidate="novalidate">
+                    <div class="row">
+
+                                    <input  value="50"  type="hidden" name="Idcomment" id="Idcomment" class="form-control" />
+                                    <input  value="50"  type="hidden" name="Iduser" id="Iduser" class="form-control" />
+                                    <input  value="2021-06-23"  type="hidden" name="date" id="date" class="form-control" />
+                                    <input  value="salma"  type="hidden" name="nameuser" id="nameuser" class="form-control" />
+
+
+
+                                    </div>
+    <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="form-outline">
+                                    <input class="form-control" name="comment" id="comment" type="text"
+                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter The Comment'"
+                                        placeholder='Enter The Comment'>
+                                    <label class="form-label" for="Title">Enter The Comment</label>
+                                </div>
+                                <small id="errorTitle"></small>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group mt-3">
+                        <button type="submit" class="add_course button button-contactForm btn_1">Add Comment</button>
+                    </div>
+                </form>
+            </div>
+        </center>
+
+    </section>
 
       
     </body>
