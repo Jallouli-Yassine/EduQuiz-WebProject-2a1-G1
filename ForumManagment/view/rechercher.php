@@ -3,6 +3,9 @@
     require_once"./../controllers/postController.php";
     require_once"./../model/modelPost.php";
 
+    $postC = new PostC();
+    $listePostsCherche=$postC->rechercher($_GET['search']);
+
         if( isset($_POST['Iduser']) 
             && isset($_POST['nameuser']) 
             && isset($_POST['content']) 
@@ -286,27 +289,12 @@
                 
                    
                         <?php
-				foreach($listepost as $post){
+				foreach($listePostsCherche as $post){
 			?>
 			<div class="col-sm-6 col-lg-4">
                 <div class="single_special_cource">
-                <?php 
-                            
-                            $postid=$post['idpost'];
-                            include "./../connect.php";
-                            $sql = "SELECT * FROM post WHERE imageurl= $postid";
-                            $res = mysqli_query($conn, $sql);
-                            if (mysqli_num_rows($res) > 0) {
-                                while ($picture = mysqli_fetch_assoc($res)) { 
-                            ?>
-                        <img style="height:70%;" src="uploads/<?=$picture['imageurl']?>" class="special_img" alt="">
-                        <?php 
-                            }
-                            }else {
-                                echo "<h1>no picture yet</h1>";
-                            }
-                            ?>
-
+			
+                        <img src="img/special_cource_1.png" class="special_img" alt="">
                         <div class="special_cource_text">
                             <a href="course-details.html" class="btn_4"><?php echo $post['nameuser']; ?></a>
                             <h4> <?php echo $post['date']; ?></h4>
@@ -314,15 +302,7 @@
                                 <h3><?php echo $post['title']; ?></h3>
                                 
                             </a>
-
-
                             <p><?php echo $post['content']; ?></p>
-                            <form action="./upload-image.php" method="post">
-                                   <input type="" value="<?php echo $post['idpost'] ?>" name="postID" id="">
-                                   <button style="margin-left:77%" class="btn btn-warning">
-                                   <ion-icon size="large" name="cloud-upload-outline"></ion-icon>
-                                </button>
-                            </form>
                             <div class="author_info">
                                 <div class="author_img">
                                     <img src="img/author/author_1.png" alt="">
@@ -425,8 +405,6 @@
     </footer>
     <!-- footer part end-->
     <!-- jquery -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="./../../js/addCourse.js"></script>
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>

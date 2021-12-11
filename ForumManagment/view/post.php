@@ -5,7 +5,7 @@
     include_once '../Model/modelComment.php';
     require_once"./../controllers/commentController.php";
  
-  
+       
   
 
         if(isset($_POST["Iduser"])  
@@ -49,7 +49,7 @@ $listepost=$postC->afficherpost();
 
 
 $postC=new PostC();
-$id = (int) $_GET['id'];
+$id = $_POST['idpost'];
 $listepostbyid=$postC->afficherpostById($id); 
 
 
@@ -354,7 +354,7 @@ $listecomment=$commentC->affichercomment();
                                     <input  value="50"  type="hidden" name="Iduser" id="Iduser" class="form-control" />
                                     <input  value="2021-06-23"  type="hidden" name="date" id="date" class="form-control" />
                                     <input  value="mayssa"  type="hidden" name="nameuser" id="nameuser" class="form-control" />
-                                    <input  value="30" type="hidden" name="idpost" id="idpost" class="form-control" />
+                                    <input  value="<?php echo $_POST['idpost'] ?>" type="hidden" name="idpost" id="idpost" class="form-control" />
                                     
 
                                     
@@ -372,7 +372,8 @@ $listecomment=$commentC->affichercomment();
                                
                                 </form> 
                                 <div class="form-group mt-3">
-                                    <form method="POST" action="test.php?id=<?php echo $post['idpost'] ?>">
+                                    <form method="POST" action="test.php">
+                                    <input value="<?php echo $_POST['idpost'] ?>" type="hidden" name="idpostTOcomment" id="">
                                     <br>  <button type="submit" class="add_course button button-contactForm btn_1">Comment</button>
                                     </form>
                             </div>

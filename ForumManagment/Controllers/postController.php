@@ -54,7 +54,8 @@
 
 
         function supprimerpost($idpost){
-			$sql="DELETE FROM post WHERE idpost=:idpost";
+			$sql="DELETE FROM post WHERE  idpost=:idpost;
+		     DELETE FROM comment WHERE idpost='$idpost';";
 			$db = config::getConnexion();
 			$req=$db->prepare($sql);
 			$req->bindValue(':idpost', $idpost);
@@ -113,6 +114,16 @@
 				die('Erreur: '.$e->getMessage());
 			}
 		}
+
+		function rechercher($value){
+            $db = config::getConnexion();
+            $SEARCH=$db->prepare("SELECT * FROM post WHERE title LIKE :value");
+            $value="%".$value."%";
+            $SEARCH->bindParam("value",$value);
+            $SEARCH->execute();
+            return $SEARCH;
+        }
+
 
     }
 

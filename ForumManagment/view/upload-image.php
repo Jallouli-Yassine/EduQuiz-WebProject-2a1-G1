@@ -1,52 +1,61 @@
 <?php 
-	include '../Controllers/postController.php';
-    require_once"./../controllers/postController.php";
-    require_once"./../model/modelPost.php";
 
-        if( isset($_POST['Iduser']) 
-            && isset($_POST['nameuser']) 
-            && isset($_POST['content']) 
-            && isset($_POST['title']) 
-            && isset($_POST['date']) 
-            && isset($_POST['imageurl']) 
-            ){
+require_once"./../Controllers/postController.php";
+require_once"./../model/modelPost.php";
 
-        if( !empty($_POST['Iduser'])&&
-            !empty($_POST['nameuser'])&&
-            !empty($_POST['content'])&&
-            !empty($_POST['title'])&&
-            !empty($_POST['date'])&&
-            !empty($_POST['imageurl'])
-            )
+
+
+         if(isset($_FILES['my_picture'])) {
+            require_once"./../connect.php";
+
+     /*
+            echo "<pre>";
+            print_r($_FILES['my_video']);
+            */
+           
+
+            $picture_name = $_FILES['my_picture']['name'];
+
+
+            $tmpPic_name = $_FILES['my_picture']['tmp_name'];
+
+
+            $Perror = $_FILES['my_picture']['error'];
+        
+            if($Perror === 0)
             {
-                $postC = new PostC();
-                $post = new Post($_POST[''],
-                $_POST['Iduser'],
-                $_POST['nameuser'],
-                $_POST['content'],
-                $_POST['title'],
-                $_POST['date'],
-                $_POST['imageurl'],
-                0
-            );
+                $idpost = $_POST['courseID'];
+                echo $idpost;
+                //get video extension
+                $pic_ext = pathinfo($picture_name , PATHINFO_EXTENSION);
+                //n7awlo l ext to lowerCase
+                $pic_ext_lc = strtolower($pic_ext);
+            
+                //les extensions eli malezemch ndakhlo ghirhom 
+                $allowed_pic_exts = array("png" , "jpg" , "jpeg" ,"gif");
+                if(in_array($pic_ext_lc,$allowed_pic_exts)){
+                    $new_pic_name = $idpost. '.' .$pic_ext_lc;
+                    $picture_uploaded_path = 'uploads/' . $new_pic_name;
 
-                $postC->ajouterPost($post);
+                    move_uploaded_file($tmpPic_name,$picture_uploaded_path);
+        
+                    // tawa nhezo l vid li uplodineha lel data base :
 
-                header("Location:./addPost.php");
+                             
+                    $query = "UPDATE post SET  imageurl = '$new_pic_name' WHERE idpost  = $idpost";
+                    mysqli_query($conn,$query);
+                    header("Location: addPost.php");
+                }else
+                {
+                    $errorExtMsg = "you can't upload file of this type!";
+                    header("Location: index.php?error=$errorExtMsg");
+                }
+                    
             }
+       
         }
-      
-
-        function redirect($url) {
-            ob_start();
-            header('Location: '.$url);
-            ob_end_flush();
-            die();
-        }
-	$postC=new PostC();
-	$listepost=$postC->afficherpost(); 
+        
 ?>
-
 
 
 <!doctype html>
@@ -165,92 +174,14 @@
     <section class="special_cource padding_top">
         <center>
             <div class="col-lg-8">
-                <form class="form-contact contact_form" action="" method="POST" id="contactForm" novalidate="novalidate">
+                <form class="form-contact contact_form"  enctype="multipart/form-data" action="" method="POST" id="contactForm" novalidate="novalidate">
                     <div class="row">
-
-                                    <input  value="50"  type="hidden" name="Idpost" id="Idpost" class="form-control" />
-                                    <input  value="50"  type="hidden" name="Iduser" id="Iduser" class="form-control" />
-                                    <input  value="2021-06-23"  type="hidden" name="date" id="date" class="form-control" />
-                                    <input  value="salma"  type="hidden" name="nameuser" id="nameuser" class="form-control" />
-
-
-                        <!--div class="col-12">
-                            <select style="margin-bottom :3%" class="form-select" name="Categorie" aria-label="Default select example">
-                                <option selected>Select Course Categori</option>
-                                <option value="programation">programation</option>
-                                <option value="photography">photography</option>
-                                <option value="design">design</option>
-                                <option value="math">math</option>
-                                
-                            </select-->
-                            <!--
-                            <div class="btn-group">
-                                <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off"
-                                    checked />
-                                <label class="btn btn-secondary" for="option1">Checked</label>
-                                <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" />
-                                <label class="btn btn-secondary" for="option2">Radio</label>
-                                <input type="radio" class="btn-check" name="options" id="option3" autocomplete="off" />
-                                <label class="btn btn-secondary" for="option3">Radio</label>
-                            </div>
-                        -->
-
-
-                            <!--small id="errorCategories"></small>
-
-                        </div-->
-
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <div class="form-outline">
-                                    <input class="form-control" name="title" id="title" type="text"
-                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter The Title'"
-                                        placeholder='Enter The Title'>
-                                    <label class="form-label" for="Title">Enter The Title</label>
-                                </div>
-                                <small id="errorTitle"></small>
-                            </div>
-                        </div>
-
-                        <!--div class="col-sm-6">
-                            <div class="form-group">
-                                <div class="form-outline">
-                                    <input name="Price" type="number" id="Price" class="form-control" min="0" />
-                                    <label class="form-label" for="Price">Enter The Price</label>
-                                </div>
-
-                                <div class="error">
-                                    <small id="errorPrice"></small>
-                                </div>
-                            </div>
-                        </div-->
-
-
+                    <input value="<?php echo $_POST['postID']?>" type="" name="courseID" id="">
                         <div class="col-12">
                             <div class="form-group">
-                                <div class="form-outline">
-                                    <textarea name="content" class="form-control" id="content" rows="4"></textarea>
-                                    <label class="form-label" for="content">Enter The Description</label>
-                                </div>
-                                <small id="errorDescription"></small>
-                            </div>
-                        </div>
-
-                        <!--div class="col-6">
-                            <div class="form-group">
-
-                                <label class="form-label" for="Video">Pick The Video File</label>
-                                <input name="videoUrl" type="file" class="form-control" id="Video" />
-                              <small id="errorVideoExt"></small>  
-                            </div>
-
-                        </div-->
-
-                        <div class="col-6">
-                            <div class="form-group">
-
+                                
                                 <label class="form-label" for="Image">Pick Image </label>
-                                <input name="imageurl" type="file" class="form-control" id="imageurl" />
+                                <input name="my_picture" type="file" class="form-control" id="imageurl" />
                                <small id="errorImageExt"></small> 
                             </div>
 
@@ -258,7 +189,7 @@
 
                     </div>
                     <div class="form-group mt-3">
-                        <button type="submit" class="add_course button button-contactForm btn_1">add post</button>
+                        <button type="submit" class="add_course button button-contactForm btn_1">upload image</button>
                     </div>
                 </form>
             </div>
@@ -268,89 +199,6 @@
     <!--::blog_part end::-->
 
     <!--::review_part start::-->
-  <!--::review_part start::-->
-    <section class="special_cource padding_top">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-5">
-                    <div class="section_tittle text-center">
-                        <h2>Recent posts</h2>
-                    </div>
-                </div>
-            </div>
-            <form class="mt-5 mb-5" action="./rechercher.php" method="GET">
-                            <input style="display:inline-block; width:200px;"  class="form-control" type="text" name="search" placeholder="search ...." />
-                            <input   class="btn btn-outline-warning" type="submit" value="search">
-                        </form>
-            <div class="row">
-                
-                   
-                        <?php
-				foreach($listepost as $post){
-			?>
-			<div class="col-sm-6 col-lg-4">
-                <div class="single_special_cource">
-                <?php 
-                            
-                            $postid=$post['idpost'];
-                            include "./../connect.php";
-                            $sql = "SELECT * FROM post WHERE imageurl= $postid";
-                            $res = mysqli_query($conn, $sql);
-                            if (mysqli_num_rows($res) > 0) {
-                                while ($picture = mysqli_fetch_assoc($res)) { 
-                            ?>
-                        <img style="height:70%;" src="uploads/<?=$picture['imageurl']?>" class="special_img" alt="">
-                        <?php 
-                            }
-                            }else {
-                                echo "<h1>no picture yet</h1>";
-                            }
-                            ?>
-
-                        <div class="special_cource_text">
-                            <a href="course-details.html" class="btn_4"><?php echo $post['nameuser']; ?></a>
-                            <h4> <?php echo $post['date']; ?></h4>
-                            <a href="course-details.html">
-                                <h3><?php echo $post['title']; ?></h3>
-                                
-                            </a>
-
-
-                            <p><?php echo $post['content']; ?></p>
-                            <form action="./upload-image.php" method="post">
-                                   <input type="" value="<?php echo $post['idpost'] ?>" name="postID" id="">
-                                   <button style="margin-left:77%" class="btn btn-warning">
-                                   <ion-icon size="large" name="cloud-upload-outline"></ion-icon>
-                                </button>
-                            </form>
-                            <div class="author_info">
-                                <div class="author_img">
-                                    <img src="img/author/author_1.png" alt="">
-                                    
-                                </div>
-                                <div class="form-group mt-3">
-                                <form method="POST" action="post.php">
-                                <input type="hidden" value="<?php echo $post['idpost'] ?>" name="idpost" id="">
-                        <button type="submit" class="add_course button button-contactForm btn_1" style="height: 50px">details</button>
-                                 </form>
-                    </div>
-
-                                
-                            </div>
-                        </div>
-                        </div>
-                        </div>
-                        <?php
-				}
-			?>
-                   
-               
-                
-                
-                
-            </div>
-        </div>
-    </section> 
     <br><br>
 
     <!-- footer part start-->
@@ -425,8 +273,6 @@
     </footer>
     <!-- footer part end-->
     <!-- jquery -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="./../../js/addCourse.js"></script>
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>

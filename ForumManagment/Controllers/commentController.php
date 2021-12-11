@@ -38,7 +38,17 @@
 				die('Erreur:'. $e->getMeesage());
 			}
 		}
-
+        function affichercommentOF1post($idPost){
+			$sql="SELECT * FROM comment where idpost = '$idPost'";
+			$db = config::getConnexion();
+			try{
+				$liste = $db->query($sql);
+				return $liste;
+			}
+			catch(Exception $e){
+				die('Erreur:'. $e->getMeesage());
+			}
+		}
 
         function supprimercomment($idcomment){
 			$sql="DELETE FROM comment WHERE idcomment=:idcomment";

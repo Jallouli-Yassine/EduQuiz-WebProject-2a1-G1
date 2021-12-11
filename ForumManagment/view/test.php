@@ -1,4 +1,5 @@
 <?php 
+// COMMENT
 	include '../Controllers/commentController.php';
     require_once"./../controllers/commentController.php";
     require_once"./../model/modelComment.php";
@@ -32,7 +33,7 @@
 
                 $commentC->ajouterComment($comment);
 
-                header("Location:./test.php");
+                header('Location:./addPost.php');
             }
         }
       
@@ -43,9 +44,10 @@
             ob_end_flush();
             die();
         }
-	$commentC=new CommentC();
-	$listepost=$commentC->affichercomment(); 
 
+	$commentC=new CommentC();
+	$listepost=$commentC->affichercommentOF1post($_POST['idpostTOcomment']); 
+      
 
     
 ?>
@@ -174,7 +176,8 @@
                                     <input  value="50"  type="hidden" name="Idcomment" id="Idcomment" class="form-control" />
                                     <input  value="50"  type="hidden" name="Iduser" id="Iduser" class="form-control" />
                                     <input  value="2021-06-23"  type="hidden" name="date" id="date" class="form-control" />
-                                    <input  value="50"  type="hidden" name="Idpost" id="Idpost" class="form-control" />
+                                    <input  value="<?php echo $_POST['idpostTOcomment'] ?>"  type="hidden" name="Idpost" id="Idpost" class="form-control" />
+                                   
 
 
                         <!--div class="col-12">
@@ -286,10 +289,19 @@
                         <div class="special_cource_text">
                             <a href="course-details.html" class="btn_4"><?php echo $comment['nameuser']; ?></a>
                             <h4> <?php echo $comment['date']; ?></h4>
+                            <input type="hidden" name="idpost" value="<?php echo $comment['idpost']; ?>" id="">
                             <a href="course-details.html">
                                 <h3><?php "Comment Descriptiion"; ?></h3>
                             </a>
+                            
                             <p><?php echo $comment['content']; ?></p>
+                            <form action="./removeComment.php" method="post">
+                                   <input type="hidden" value="<?php echo $comment['idcomment'] ?>" name="commentID" id="">
+                                   <button style="margin-left:77%" class="btn btn-danger">
+                            <ion-icon size="large" name="trash-outline"></ion-icon>
+                                </button>
+                            </form>
+
                             <div class="author_info">
                                 <div class="author_img">
                                     <img src="img/author/author_1.png" alt="">
@@ -389,6 +401,8 @@
     </footer>
     <!-- footer part end-->
     <!-- jquery -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="./../../js/addCourse.js"></script>
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
