@@ -8,15 +8,13 @@
             && isset($_POST['content']) 
             && isset($_POST['title']) 
             && isset($_POST['date']) 
-            && isset($_POST['imageurl']) 
             ){
 
         if( !empty($_POST['Iduser'])&&
             !empty($_POST['nameuser'])&&
             !empty($_POST['content'])&&
             !empty($_POST['title'])&&
-            !empty($_POST['date'])&&
-            !empty($_POST['imageurl'])
+            !empty($_POST['date'])
             )
             {
                 $postC = new PostC();
@@ -246,7 +244,7 @@
 
                         </div-->
 
-                        <div class="col-6">
+                      <!--  <div class="col-6">
                             <div class="form-group">
 
                                 <label class="form-label" for="Image">Pick Image </label>
@@ -254,7 +252,7 @@
                                <small id="errorImageExt"></small> 
                             </div>
 
-                        </div>
+                        </div> -->
 
                     </div>
                     <div class="form-group mt-3">
@@ -318,7 +316,7 @@
 
                             <p><?php echo $post['content']; ?></p>
                             <form action="./upload-image.php" method="post">
-                                   <input type="" value="<?php echo $post['idpost'] ?>" name="postID" id="">
+                                   <input type="hidden" value="<?php echo $post['idpost'] ?>" name="postID" id="">
                                    <button style="margin-left:77%" class="btn btn-warning">
                                    <ion-icon size="large" name="cloud-upload-outline"></ion-icon>
                                 </button>

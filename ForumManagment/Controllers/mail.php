@@ -30,7 +30,7 @@ $mail = new PHPMailer();
     $mail->setFrom('salma.saidi@esprit.tn', 'EDUQUIZ ADMIN');
     $mail->addAddress('salma.saidi@esprit.tn');   // l eamil mtaa l user li tfasakhlou l post
 
-    $mail->Subject = 'EDUQUIZ COURSE MANAGMENT';
+    $mail->Subject = 'EDUQUIZ FORUM MANAGMENT';
     $mail->Body    = "<h1> your post was deleted !! </h1>";
     $mail->send();
 
