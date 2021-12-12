@@ -41,6 +41,7 @@
                 $postC->ajouterPost($post);
 
                 header("Location:./forum.php");
+               
             }
         }
       
@@ -48,9 +49,10 @@ $postC=new PostC();
 $listepost=$postC->afficherpost();
 
 
-$postC=new PostC();
-$id = $_POST['idpost'];
-$listepostbyid=$postC->afficherpostById($id); 
+//$postC=new PostC();
+//$id = $_POST['idpost'];
+
+//$listepostbyid=$postC->afficherpostById($id); 
 
 
 if( isset($_POST['Iduser']) 

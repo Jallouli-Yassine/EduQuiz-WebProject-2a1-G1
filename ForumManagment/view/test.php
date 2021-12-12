@@ -8,14 +8,14 @@
     require_once"./../model/modelPost.php";
 
         if( isset($_POST['Iduser']) 
-            && isset($_POST['nameuser']) 
+           
             && isset($_POST['content']) 
             && isset($_POST['date']) 
             && isset($_POST['Idpost']) 
             ){
 
         if( !empty($_POST['Iduser'])&&
-            !empty($_POST['nameuser'])&&
+            
             !empty($_POST['content'])&&
             !empty($_POST['date'])&&
             !empty($_POST['Idpost'])
@@ -206,7 +206,7 @@
 
                         </div-->
 
-                        <div class="col-sm-6">
+                       <!-- <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="form-outline">
                                     <input class="form-control" name="nameuser" id="nameuser" type="text"
@@ -216,7 +216,7 @@
                                 </div>
                                 <small id="errorTitle"></small>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!--div class="col-sm-6">
                             <div class="form-group">
