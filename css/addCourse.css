@@ -1,0 +1,12 @@
+#errorTitle ,
+#errorPrice ,
+#errorDescription ,
+#errorVideo ,
+#errorImage ,
+#errorImageExt ,
+#errorVideoExt,
+#errorCategories,
+#errorVideoExt,
+#errorImageExt{
+    color: red;
+}
