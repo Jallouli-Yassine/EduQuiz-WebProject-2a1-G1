@@ -105,17 +105,6 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h2 style="text-align:center;">events list</h2> <br>
-                        <form class="mt-5 mb-5" action="./rechercherUsersAd.php" method="POST">
-                        <select id="select" style="margin-bottom :3%; width:20%;height:35px" class="form-select"  id="Categorie" name="Categorie" aria-label="Default select example">
-                <option  selected>Select role</option>
-                <option id="user" value="user">user(s)</option>
-                <option id="prof" value="prof">prof(s)</option>
-                <option id="admin" value="admin">admin(s)</option>
-            </select>
-                            <input style="display:inline-block; width:200px;"  class="form-control" type="hidden" id="search" name="search" placeholder="search ...." />
-                            <input   class="btn btn-warning" type="submit" value="search">
-                        </form>
-
                         <table style="border:0px solid grey;text-align:center" class="table">
                             <tr style="border-bottom: 0px solid grey;">
                                
@@ -160,15 +149,15 @@
                 </td>
                 <td  style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">  
                                      <form action='../../eventManagment/back mehdi/Views/ajouteradherent.php' method ='Post'>
-                                    <input type="" value=<?php echo $event['idevent'] ;?> name='idevent'>  
-                                    <input type="" value=<?php echo $event['nameevent'] ;?> name='nameevent'>  
-                                    <input type="" value=<?php echo $event['email'] ;?> name='email'>  
-                                    <input type="" value=<?php echo $event['subject'] ;?> name='subject'>  
-                                    <input type="" value=<?php echo $event['date'] ;?> name='date'>  
-                                    <input type="" value=<?php echo $event['time'] ;?> name='time'>
-                                    <input type="" value=<?php echo $event['numberparticipate'] ;?> name='numberparticipate'>  
-                                    <input type="" value=<?php echo $event['image'] ;?> name='image'>    
-                                    <input type="" value=<?php echo $event['lienJeu'] ;?> name='lienjeu'>    
+                                    <input type="hidden" value=<?php echo $event['idevent'] ;?> name='idevent'>  
+                                    <input type="hidden" value=<?php echo $event['nameevent'] ;?> name='nameevent'>  
+                                    <input type="hidden" value=<?php echo $event['email'] ;?> name='email'>  
+                                    <input type="hidden" value=<?php echo $event['subject'] ;?> name='subject'>  
+                                    <input type="hidden" value=<?php echo $event['date'] ;?> name='date'>  
+                                    <input type="hidden" value=<?php echo $event['time'] ;?> name='time'>
+                                    <input type="hidden" value=<?php echo $event['numberparticipate'] ;?> name='numberparticipate'>  
+                                    <input type="hidden" value=<?php echo $event['image'] ;?> name='image'>    
+                                    <input type="hidden" value=<?php echo $event['lienJeu'] ;?> name='lienjeu'>    
                                     <input type="submit" class="btn btn-success" name='accept' value='accept'>
                                 </form>
             </td>

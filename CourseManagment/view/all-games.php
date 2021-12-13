@@ -103,16 +103,6 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h2 style="text-align:center;">events list</h2> <br>
-                        <form class="mt-5 mb-5" action="./rechercherUsersAd.php" method="POST">
-                        <select id="select" style="margin-bottom :3%; width:20%;height:35px" class="form-select"  id="Categorie" name="Categorie" aria-label="Default select example">
-                <option  selected>Select role</option>
-                <option id="user" value="user">user(s)</option>
-                <option id="prof" value="prof">prof(s)</option>
-                <option id="admin" value="admin">admin(s)</option>
-            </select>
-                            <input style="display:inline-block; width:200px;"  class="form-control" type="hidden" id="search" name="search" placeholder="search ...." />
-                            <input   class="btn btn-warning" type="submit" value="search">
-                        </form>
 
    <?php
 $conn = mysqli_connect("localhost","root","","coursesdb");
@@ -174,7 +164,7 @@ echo '<center> NOMBRE DES JEUX DISPONIBLE = '.$data['total'].'</center>';
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="modifierJeux.php" method="POST">
+                                    <form action="./../../jeuxManagment/back aziz/modifierJeux.php" method="POST">
                                         <input class="btn btn-warning" type="submit" value="update">
                                         <input type="hidden" name="nom_jeu" value="<?= $jeux['nom_jeu'] ?>">
                                     </form>

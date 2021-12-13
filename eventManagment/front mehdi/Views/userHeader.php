@@ -4,9 +4,9 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a style="width: 150px;" class="navbar-brand logo_1" href="./../../../usemanagment/view/index.php"> <img
+                        <a style="width: 90px;" class="navbar-brand logo_1" href="./../../../usemanagment/view/index.php"> <img
                                 src="./../img/EduQuizWhite.png" alt="logo"> </a>
-                        <a style="width: 150px;" class="navbar-brand logo_2" href="./../../../usemanagment/view/index.php"> <img
+                        <a style="width: 90px;" class="navbar-brand logo_2" href="./../../../usemanagment/view/index.php"> <img
                                 src="./../img/EduQuiz.png" alt="logo"> </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -43,6 +43,11 @@
                                 <li class="nav-item">
                                 <a class="nav-link" href="./../../../salma/ForumManagment/view/addPost.php">Forum</a>
                                 </li>
+                                <?php if($_SESSION['role']!="admin"){ ?>
+                                <li class="nav-item">
+                                <a class="nav-link" href="./../../salma/ForumManagment/view/addPost.php">Profile</a>
+                                </li>
+                                <?php } ?>
                                 <!--
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown"

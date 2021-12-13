@@ -111,6 +111,7 @@ class formulaireC
       }
 
     }
+
     function getNextQuiz($id,$idCourse)
     {
       $sql="select * from formulaire where id >'$id' and idCourse='$idCourse' LIMIT 1";

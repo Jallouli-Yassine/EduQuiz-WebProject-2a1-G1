@@ -4,9 +4,9 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a style="width: 150px;" class="navbar-brand logo_1" href="index.php"> <img
+                        <a style="width: 90px;" class="navbar-brand logo_1" href="index.php"> <img
                                 src="../../img/EduQuizWhite.png" alt="logo"> </a>
-                        <a style="width: 150px;" class="navbar-brand logo_2" href="index.php"> <img
+                        <a style="width: 90px;" class="navbar-brand logo_2" href="index.php"> <img
                                 src="../../img/EduQuiz.png" alt="logo"> </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

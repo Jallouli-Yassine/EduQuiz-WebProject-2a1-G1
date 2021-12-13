@@ -1,5 +1,5 @@
 <?php
-include_once ("C:/xampp/htdocs/EduQuiz/core/formulaireC.php");
+include_once ("./../core/formulaireC.php");
 
 $formulaire1C = new formulaireC();
 $list = $formulaire1C ->afficherformulaire($_POST["id"]);
@@ -983,7 +983,7 @@ $list = $formulaire1C ->afficherformulaire($_POST["id"]);
                                                     <form class="form-contact contact_form"  name="f"  method="post" id="contactForm"
                                                     action="../modifierQuizz.php">
                                                     <div class="row">
-                                
+                                            <input type="hidden" value="<?php echo $row['id'] ?>" name="idQ" id="">
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <input class="form-control" name="Title" id="Title" type="text"

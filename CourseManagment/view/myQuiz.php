@@ -8,7 +8,7 @@ if(empty($_SESSION['e']) || $_SESSION['role']== "user" || $_SESSION['role']== "a
 }
     require_once "./../controllers/CourseController.php";
     $courseC = new CourseC();
-    $myCourses= $courseC->getProfCourses(($_SESSION['user']['ID']));
+    $myQuiz= $courseC->getAllQuiz($_POST['IDCOURSE']);
  
 
 	
@@ -112,100 +112,70 @@ if(empty($_SESSION['e']) || $_SESSION['role']== "user" || $_SESSION['role']== "a
                 <div class="row">
 
 
-                <a href="./../../eventManagment/front mehdi/Views/accueil.php" style="float : right;margin-right:50px;" class="btn btn-info" value="events">events</a>
+                <a href="./myCourse.php" style="float : left;margin-left:50px;" class="btn btn-info" value="events">BACK</a>
  
                     <div class="col-lg-12">
-                        <h2 style="text-align:center;padding:0 0 2% 0">MY COURSES</h2>
+                        <h2 style="text-align:center;padding:0 0 2% 0">MY Quiz</h2>
                         <table  style="border:0px solid grey;text-align:center" class="table">
                             <tr style="border-bottom: 0px solid grey;">
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >course PIC</th>
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >QuizID</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >courseID</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >ProfID</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >Title</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >state</th>
-                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >#</th>
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >titre</th>
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >score</th>
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >question</th>
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >rep1</th>
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >rep2</th>
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >rep3</th>
+                                <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >rep4</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >#</th>
                                 <th style="padding: 15px; border-bottom: 1px solid #ddd;text-align:center" >#</th>
                             </tr>
-                            <?php if( !empty($myCourses) ){ ?>
-                            <?php foreach($myCourses as $course) { ?>
+                            <?php if( !empty($myQuiz) ){ ?>
+                            <?php foreach($myQuiz as $course) { ?>
                                
 
                             <tr>
                                 <td   style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                <?php 
-                            
-                            $courseID=$course['courseID'];
-                            include "./../connect.php";
-                            $sql = "SELECT * FROM courses WHERE picture_url= $courseID.";
-                            $res = mysqli_query($conn, $sql);
-                            if (mysqli_num_rows($res) > 0) {
-                                while ($picture = mysqli_fetch_assoc($res)) { 
-                            ?>
-
-                                    <!--
-                                        oncontextmenu="return false;"
-                                    -->
-
-                                    <img  style="height:50px;border-radius:100%" src="uploads/coursesPictures/<?=$picture['picture_url']?>" alt="">
-
-
-                            <?php 
-                            }
-                            }else {
-                                echo "<h1>no picture yet</h1>";
-                            }
-                            ?>
+                                <?php echo $course["id"] ?>
                                 </td>
                                 <td   style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $course["courseID"] ?>
+                                    <?php echo $course["idCourse"] ?>
                                 </td>
                                 <td  style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $course['profID'] ?>
+                                    <?php echo $course['Titre'] ?>
                                 </td>
                                 <td  style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <?php echo $course['title'] ?>
+                                    <?php echo $course['score'] ?>
                                 </td>
                                 <td  style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                <?php if($course['etat']==0) { ?>
-                                    <div   style="padding:5px;width:100%;margin-bottom:0" class="alert alert-warning" role="alert">
-                                    pending
-                                    </div>
-                                    <?php }else if($course['etat']==1){ ?>
-
-                                    <div   style="padding:5px;width:100%;margin-bottom:0" class="alert alert-success" role="alert">
-                                    accepted
-                                    </div>
-                                        <?php }else{ ?>
-                                            <div   style="padding:5px;width:100%;margin-bottom:0" class="alert alert-danger" role="alert">
-                                    declined
-                                    </div>
-                                            <?php } ?>
+                                <?php echo $course['question'] ?>
                                 </td>
                                 <td style="width:400px; padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                    <form  action="./update-course.php" method="POST">
-                                        <input style="float : right;margin-right:50px;" class="btn btn-warning" type="submit" value="update">
-                                    
-                                        <input type="hidden" name="courseID" value="<?=$course['courseID']?>">
-                                    </form>
-                                    <?php if($course['video_url']=="") { ?>
-                                    <form  action="./upload-video.php" method="POST">
-                                        <input style="float : right;margin-right:70px;" class="btn btn-danger" type="submit" value="must upload files">
-                                        <input type="hidden" name="courseID" value="<?=$course['courseID']?>">
-                                    </form>
-                                    <?php } ?>
+                                <?php echo $course['rep1'] ?>
+
+                                </td>
+                                <td style="width:400px; padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                <?php echo $course['rep2'] ?>
+
+                                </td>
+                                <td style="width:400px; padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                <?php echo $course['rep3'] ?>
+
+                                </td>
+                                <td style="width:400px; padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
+                                <?php echo $course['question'] ?>
 
                                 </td>
                                 <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                <form  action="./add-question-quiz.php" method="POST">
-                                        <input  class="btn btn-success" type="submit" value="add Question">
-                                        <input type="hidden" name="idCourse" value="<?=$course['courseID']?>">
+                                <form  action="./../../ameni/supprimerformulaire.php" method="POST">
+                                        <input  class="btn btn-danger" type="submit" value="delete qestion">
+                                        <input type="hidden" name="id" value="<?=$course['id']?>">
                                     </form>
                                 </td>
                                 <td style="padding: 15px;border-bottom: 1px solid #ddd;border-left: 0px solid #ddd;border-right: 0px solid #ddd">
-                                <form  action="./myQuiz.php" method="POST">
-                                        <input  class="btn btn-primary" type="submit" value="get course Quiz">
-                                        <input type="hidden" name="IDCOURSE" value="<?=$course['courseID']?>">
+                                <form  action="./../../ameni/EDu-Quiz B/edit-Quizz-assets.php" method="POST">
+                                        <input  class="btn btn-warning" type="submit" value="update question">
+                                        <input type="hidden" name="id" value="<?=$course['id']?>">
                                     </form>
                                 </td>
                             </tr>

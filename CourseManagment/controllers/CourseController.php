@@ -40,7 +40,20 @@
 			}
         }
 
-
+        function getAllQuiz($idCourse)
+        {
+          $sql="select * from formulaire WHERE idCourse='$idCourse'";
+          $db= config::getConnexion();
+          try
+          {
+            return $db->query($sql);
+          }
+          catch (Exception $e)
+          {
+            echo 'Error: '.$e->getMessage();
+          }
+    
+        }
 
         function getTrueCourses($true) {
 			$sql="SELECT * FROM courses WHERE etat=$true";

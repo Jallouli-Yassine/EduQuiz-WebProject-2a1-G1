@@ -120,35 +120,35 @@ if (
                                     <form action="" method="post">
 
                                         <div class="form-outline">
-                                            <input name="nom_jeu" type="text" id="nom_jeu" class="form-control" />
-                                            <label class="form-label" for="nom_jeu">Nom_jeu</label>
-                                        </div>
+                                          <label class="form-label" for="nom_jeu">Nom_jeu</label>
+                                          <input name="nom_jeu" type="text" id="nom_jeu" class="form-control" />
+                                        </div> <br>
                                         <div class="file-upload-wrapper">
-                                            <input type="file" name="lien_jeu" type="text" id="lien_jeu" class="file-upload" />
-                                            <label class="form-label" for="lien_jeu">Dossier de jeu</label>
-                                        </div>
+                                          <label class="form-label" for="lien_jeu">Dossier de jeu</label>
+                                          <input type="file" name="lien_jeu" type="text" id="lien_jeu" class="file-upload" />
+                                        </div> <br>
                                         <div class="form-outline">
-                                            <input name="prop_jeu" type="text" id="prop_jeu" class="form-control" />
-                                            <label class="form-label" for="prop_jeu">prop_jeu</label>
-                                        </div>
+                                          <label class="form-label" for="prop_jeu">prop_jeu</label>
+                                          <input name="prop_jeu" type="text" id="prop_jeu" class="form-control" />
+                                        </div> <br>
                                         <div class="form-outline">
-                                            <input name="age_jeu" type="text" id="age_jeu" class="form-control" />
-                                            <label class="form-label" for="age_jeu">age_jeu</label>
-                                        </div>
+                                          <label class="form-label" for="age_jeu">age_jeu</label>
+                                          <input name="age_jeu" type="text" id="age_jeu" class="form-control" />
+                                        </div> <br>
                                         <div class="form-outline">
-                                            <input name="date_jeu" type="date" id="date_jeu" class="form-control" />
-                                            <label class="form-label" for="date_jeu">date_jeu</label>
+                                          <label class="form-label" for="date_jeu">date_jeu</label>
+                                          <input name="date_jeu" type="date" id="date_jeu" class="form-control" />
                                         </div>
                                         <br>
-                                        <br>
+                                 
                                         <div class="file-upload-wrapper">
-                                            <input type="file" name="img_jeu" type="text" id="img_jeu" class="file-upload" />
-                                            <label class="form-label" for="img_jeu">img_jeu</label>
-                                        </div>
+                                          <label class="form-label" for="img_jeu">img_jeu</label>
+                                          <input type="file" name="img_jeu" type="text" id="img_jeu" class="file-upload" />
+                                        </div> <br>
                                         <div class="form-outline">
-                                            <input  name="mode_jeu" type="text" id="mode_jeu" class="form-control" />
-                                            <label class="form-label" for="mode_jeu">mode_jeu</label>
-                                        </div>
+                                          <label class="form-label" for="mode_jeu">mode_jeu</label>
+                                          <input  name="mode_jeu" type="text" id="mode_jeu" class="form-control" />
+                                        </div> <br>
                                         
                                         <input style="float:right;" type="submit" class="btn btn-black" value="add game">
 

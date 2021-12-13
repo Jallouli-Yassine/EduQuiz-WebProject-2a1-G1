@@ -1,6 +1,5 @@
 <?php
     session_start();
-    include "./entites/formulaire.php";
     include "./core/formulaireC.php";
     $i=new formulaireC();
 
@@ -51,9 +50,9 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a style="width: 135px;" class="navbar-brand logo_1" href="index.html"> <img
+                        <a style="width: 90px;" class="navbar-brand logo_1" href="./../usemanagment/view/index.php"> <img
                                 src="img/EduQuizWhite.png" alt="logo"> </a>
-                        <a style="width: 135px;" class="navbar-brand logo_2" href="index.html"> <img
+                        <a style="width: 90px;" class="navbar-brand logo_2" href="./../usemanagment/view/index.php"> <img
                                 src="img/EduQuiz.png" alt="logo"> </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -121,9 +120,7 @@
 
 
     <br>
-    <div class="progress">
-        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-      </div>
+
     <div class="container mt-5">
         <div class="d-flex justify-content-center row">
             <div class="col-md-10 col-lg-10">

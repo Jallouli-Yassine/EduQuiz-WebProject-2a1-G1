@@ -1,8 +1,8 @@
 <?PHP
-include_once "C:/xampp/htdocs/EduQuiz/core/formulaireC.php";
+include_once "./core/formulaireC.php";
 
     $UC=new formulaireC();
     $UC->supprimerformulaire($_POST["id"]);
-    header("location:../EduQuiz/EDu-Quiz B/Quizz-assets.php");
+    header("location:../CourseManagment/view/myCourse.php");
 
 ?>

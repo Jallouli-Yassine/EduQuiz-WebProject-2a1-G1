@@ -64,13 +64,12 @@
 				$db = config::getConnexion();
 				$query = $db->prepare(
 				'UPDATE usertable SET
-				first_Name= :first_Name,last_Name = :last_Name, email= :email, pass= :pass, Date_Naissance= :Date_Naissance
+				first_Name= :first_Name,last_Name = :last_Name, email= :email, Date_Naissance= :Date_Naissance
 				WHERE ID= :ID');
 				$query->execute([
 					'first_Name' => $user->getfirst_Name(),
 					'last_Name' => $user->getlast_Name(),
 					'email' => $user->getemail(),
-					'pass' => $user->getpass(),
 					'Date_Naissance' => $user->getDate_Naissance(),
 					'ID' => $ID
 				]);

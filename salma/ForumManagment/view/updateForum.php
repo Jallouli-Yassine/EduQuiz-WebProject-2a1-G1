@@ -1,4 +1,6 @@
+
 <?php
+    session_start();
     include_once '../model/modelPost.php';
     include '../Controllers/postController.php';
 
@@ -32,7 +34,7 @@
         ) {
             $post = new post(
                 $_POST['id'], 
-                $_POST['iduser'], 
+                $_SESSION['user']['ID'],
 			    $_POST['nameuser'], 
                 $_POST['content'], 
 				$_POST['title'],
@@ -186,6 +188,7 @@
                     <div class="row">
 
                     <input  value="50"  type="hidden" name="Idpost" id="Idpost" class="form-control" />
+                    <input  value="<?php echo $post['imageurl'] ?>"  type="hidden" name="imageurl" id="Idpost" class="form-control" />
                                     <input  value="50"  type="hidden" name="Iduser" id="Iduser" class="form-control" />
                                     <input  value="<?php $date = date('d-m-y h:i:s');echo $date;?>"  type="hidden" name="date" id="date" class="form-control" />
                                     <input  value="salma"  type="hidden" name="nameuser" id="nameuser" class="form-control" />
